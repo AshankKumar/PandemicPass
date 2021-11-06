@@ -3,6 +3,7 @@ package edu.illinois.cs465.pandemicpass;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -113,6 +114,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                     Toast.makeText(RegisterActivity.this, "Successfully registered user.", Toast.LENGTH_LONG).show();
                                                     progressBar.setVisibility(View.INVISIBLE);
                                                     // start new activity to home screen and destroy this one instead of keeping in stack
+                                                    startActivity(new Intent(RegisterActivity.this, HomeScreenActivity.class));
+                                                    RegisterActivity.this.finish();
                                                 }
                                                 else {
                                                     Toast.makeText(RegisterActivity.this, "Failed to register user.", Toast.LENGTH_LONG).show();

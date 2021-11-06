@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             login();
         }
         else if (id == R.id.register) {
-            startActivity(new Intent(this, RegisterActivity.class));
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         }
         else if (id == R.id.forgotPassword) {
             // TODO
@@ -98,11 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // redirect to home screen
-
                                 // for now just do a toast
                                 Toast.makeText(MainActivity.this, "Success.", Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.INVISIBLE);
+
+                                // redirect to home screen
+                                startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
                             }
                             else {
                                 Toast.makeText(MainActivity.this, "Failed to login.", Toast.LENGTH_LONG).show();
