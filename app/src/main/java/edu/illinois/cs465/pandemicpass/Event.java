@@ -4,28 +4,32 @@ import java.util.List;
 
 public class Event {
 
-    public String host_id;
-    public String host_name;
-    public String event_code;
-    public String event_name;
+    public String hostId;
+    public String hostName;
+    public String eventCode;
+    public String eventName;
     public String date;
     public String location;
     public String description;
-    public List<Guest> guest_list;
+    public List<Guest> guestList;
+    public boolean acceptVaccinationRecord;
+    public boolean acceptTestResult;
 
     public Event() {}
 
-    public Event(String host_id, String host_name, String event_code, String event_name,
-                 String date, String location, String description,
-                 List<Guest> guest_list) {
-        this.host_id = host_id;
-        this.host_name = host_name;
-        this.event_code = event_code;
-        this.event_name = event_name;
+    public Event(String hostId, String hostName, String eventCode, String eventName,
+                 String date, String location, String description, List<Guest> guestList,
+                 boolean acceptVaccinationRecord, boolean acceptTestResult) {
+        this.hostId = hostId;
+        this.hostName = hostName;
+        this.eventCode = eventCode;
+        this.eventName = eventName;
         this.date = date;
         this.location = location;
         this.description = description;
-        this.guest_list = guest_list;
+        this.guestList = guestList;
+        this.acceptVaccinationRecord = acceptVaccinationRecord;
+        this.acceptTestResult = acceptTestResult;
     }
 
 }

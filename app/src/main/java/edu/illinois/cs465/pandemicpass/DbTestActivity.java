@@ -98,7 +98,7 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
-                    Event event = new Event(userId, "tony", generated_code, "tony's event", dateFormat.format(calendar.getTime()), "home", "11123", new ArrayList<Guest>());
+                    Event event = new Event(userId, "tony", generated_code, "tony's event", dateFormat.format(calendar.getTime()), "home", "11123", new ArrayList<Guest>(), true, true);
 
                     dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

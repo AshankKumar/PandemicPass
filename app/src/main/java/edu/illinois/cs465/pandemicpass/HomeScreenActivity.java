@@ -45,7 +45,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             startActivity(new Intent(HomeScreenActivity.this, HostEventActivity.class));
         }
         else if (id == R.id.viewEvents) {
-            startActivity(new Intent(HomeScreenActivity.this, ViewEventsActivity.class));
+            startActivity(new Intent(HomeScreenActivity.this, EventListActivity.class));
         }
         else if (id == R.id.userProfile) {
             // TODO for tony

@@ -10,10 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PandemicPass">
         <activity
-            android:name=".ViewEventsActivity"
+            android:name=".EventGuestListForGuestActivity"
             android:exported="true" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".EventGuestListForHostActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EventDetailsForHostActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EventListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProfileListActivity"
             android:exported="true" />
         <activity
             android:name=".HostEventActivity"

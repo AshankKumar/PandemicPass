@@ -53,6 +53,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString();
         String confirmPassword = confirmPasswordEditText.getText().toString();
@@ -96,9 +100,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                             public void onComplete(@NonNull Task<Void> task) {
 
                                                 if (task.isSuccessful()) {
-                                                    // will probably remove the toast for success and just redirect instead
-                                                    Toast.makeText(RegisterActivity.this, "Successfully registered user.", Toast.LENGTH_LONG).show();
-                                                    progressBar.setVisibility(View.INVISIBLE);
+                                                    //progressBar.setVisibility(View.INVISIBLE);
                                                     // start new activity to home screen and destroy this one instead of keeping in stack
                                                     startActivity(new Intent(RegisterActivity.this, HomeScreenActivity.class));
                                                     RegisterActivity.this.finish();

@@ -71,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void login() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString();
 
@@ -99,12 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // for now just do a toast
-                                Toast.makeText(MainActivity.this, "Success.", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.INVISIBLE);
-
                                 // redirect to home screen
                                 startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
                             else {
                                 Toast.makeText(MainActivity.this, "Failed to login.", Toast.LENGTH_LONG).show();
