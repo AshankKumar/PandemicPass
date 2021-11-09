@@ -5,13 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
-    private EditText editTextFirstName, editTextLastName, editTextEmail, editTextPassword, editTextConfirmPassword;
+    private EditText emailEditText, passwordEditText, confirmPasswordEditText;
     private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
@@ -35,11 +33,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         mAuth = FirebaseAuth.getInstance();
 
-        editTextFirstName = (EditText) findViewById(R.id.firstName);
-        editTextLastName = (EditText) findViewById(R.id.lastName);
-        editTextEmail = (EditText) findViewById(R.id.email);
-        editTextPassword = (EditText) findViewById(R.id.password);
-        editTextConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
+        emailEditText = (EditText) findViewById(R.id.email);
+        passwordEditText = (EditText) findViewById(R.id.password);
+        confirmPasswordEditText = (EditText) findViewById(R.id.confirmPassword);
 
         register = (Button) findViewById(R.id.register);
         register.setOnClickListener(this);
@@ -57,39 +53,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser() {
-        String firstName = editTextFirstName.getText().toString().trim();
-        String lastName = editTextLastName.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString();
-        String confirmPassword = editTextConfirmPassword.getText().toString();
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
 
-        if (firstName.isEmpty()) {
-            editTextFirstName.setError("First Name is required.");
-            editTextFirstName.requestFocus();
-        }
-        else if (lastName.isEmpty()) {
-            editTextLastName.setError("Last Name is required.");
-            editTextLastName.requestFocus();
-        }
-        else if (email.isEmpty()) {
-            editTextEmail.setError("Email is required.");
-            editTextEmail.requestFocus();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString();
+        String confirmPassword = confirmPasswordEditText.getText().toString();
+
+        if (email.isEmpty()) {
+            emailEditText.setError("Email is required.");
+            emailEditText.requestFocus();
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Email is not valid.");
-            editTextEmail.requestFocus();
+            emailEditText.setError("Email is not valid.");
+            emailEditText.requestFocus();
         }
         else if (password.isEmpty()) {
-            editTextPassword.setError("Password is required.");
-            editTextPassword.requestFocus();
+            passwordEditText.setError("Password is required.");
+            passwordEditText.requestFocus();
         }
         else if (password.length() < 8) {
-            editTextPassword.setError("Password must be at least 8 characters.");
-            editTextPassword.requestFocus();
+            passwordEditText.setError("Password must be at least 8 characters.");
+            passwordEditText.requestFocus();
         }
         else if (!confirmPassword.equals(password)) {
-            editTextConfirmPassword.setError("Confirmation does not match password.");
-            editTextConfirmPassword.requestFocus();
+            confirmPasswordEditText.setError("Confirmation does not match password.");
+            confirmPasswordEditText.requestFocus();
         }
         else {
             progressBar.setVisibility(View.VISIBLE);
@@ -99,10 +89,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                User user = new User(firstName, lastName, email);
+                                User user = new User(email);
 
                                 FirebaseDatabase.getInstance()
-                                        .getReference("Users")
+                                        .getReference("User")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -110,9 +100,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                             public void onComplete(@NonNull Task<Void> task) {
 
                                                 if (task.isSuccessful()) {
-                                                    // will probably remove the toast for success and just redirect instead
-                                                    Toast.makeText(RegisterActivity.this, "Successfully registered user.", Toast.LENGTH_LONG).show();
-                                                    progressBar.setVisibility(View.INVISIBLE);
+                                                    //progressBar.setVisibility(View.INVISIBLE);
                                                     // start new activity to home screen and destroy this one instead of keeping in stack
                                                     startActivity(new Intent(RegisterActivity.this, HomeScreenActivity.class));
                                                     RegisterActivity.this.finish();
