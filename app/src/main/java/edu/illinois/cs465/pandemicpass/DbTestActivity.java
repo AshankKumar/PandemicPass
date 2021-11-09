@@ -94,7 +94,8 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
         Log.d("event creation", "CREATE DUMMY EVENT");
 
         String generated_code = UUID.randomUUID().toString().substring(0, 7);
-        dbReferenceEvent.orderByChild("event_code").equalTo(generated_code).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        dbReferenceEvent.orderByChild("eventCode").equalTo(generated_code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
@@ -113,6 +114,9 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
 
                         }
                     });
+                }
+                else {
+                    Log.e("firebase", "duplicate key");
                 }
             }
 
