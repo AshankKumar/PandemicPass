@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PandemicPass">
         <activity
+            android:name=".ViewEventsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HostEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".JoinEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DbTestActivity"
+            android:exported="true" />
+        <activity
             android:name=".HomeScreenActivity"
             android:exported="false" />
         <activity

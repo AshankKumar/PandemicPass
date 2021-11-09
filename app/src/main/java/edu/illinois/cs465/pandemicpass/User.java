@@ -2,13 +2,11 @@ package edu.illinois.cs465.pandemicpass;
 
 public class User {
 
-    public String firstName;
-    public String lastName;
     public String email;
 
-    public User(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User() {}
+
+    public User(String email) {
         this.email = email;
     }
 }

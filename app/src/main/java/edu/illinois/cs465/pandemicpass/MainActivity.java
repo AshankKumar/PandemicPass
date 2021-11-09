@@ -23,8 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 * */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText editTextEmail;
-    private EditText editTextPassword;
+    private EditText emailEditText;
+    private EditText passwordEditText;
     private TextView register;
     private TextView forgotPassword;
     private Button login;
@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = (EditText) findViewById(R.id.email);
-        editTextPassword = (EditText) findViewById(R.id.password);
+        emailEditText = (EditText) findViewById(R.id.email);
+        passwordEditText = (EditText) findViewById(R.id.password);
 
         login = (Button) findViewById(R.id.login);
         login.setOnClickListener(this);
@@ -66,28 +66,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (id == R.id.forgotPassword) {
             // TODO
+
         }
     }
 
     private void login() {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString();
 
         if (email.isEmpty()) {
-            editTextEmail.setError("Email is required.");
-            editTextEmail.requestFocus();
+            emailEditText.setError("Email is required.");
+            emailEditText.requestFocus();
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Email is not valid.");
-            editTextEmail.requestFocus();
+            emailEditText.setError("Email is not valid.");
+            emailEditText.requestFocus();
         }
         else if (password.isEmpty()) {
-            editTextPassword.setError("Password is required.");
-            editTextPassword.requestFocus();
+            passwordEditText.setError("Password is required.");
+            passwordEditText.requestFocus();
         }
         else if (password.length() < 8) {
-            editTextPassword.setError("Password must be at least 8 characters.");
-            editTextPassword.requestFocus();
+            passwordEditText.setError("Password must be at least 8 characters.");
+            passwordEditText.requestFocus();
         }
         else {
 
