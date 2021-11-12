@@ -5,10 +5,10 @@
     android:orientation="vertical"
     android:gravity="top|center">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EVENT NAME PLACEHOLDER"
+        android:hint="EVENT NAME PLACEHOLDER"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:layout_marginTop="30dp"/>
@@ -27,7 +27,7 @@
             android:textSize="15sp"/>
 
         <Button
-            android:id="@+id/eventDatePickerButton"
+            android:id="@+id/eventDatePickerButtonSummary"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Jan 01 2020"
@@ -50,7 +50,7 @@
             android:textSize="15sp"/>
 
         <Button
-            android:id="@+id/verificationDatePickerButton"
+            android:id="@+id/verificationDatePickerButtonSummary"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Jan 01 2020"
@@ -59,23 +59,56 @@
             android:onClick="openVerificationDatePicker"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vaccine Card Allowed?"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginRight="30dp"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COVID Test Allowed?"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginRight="46dp"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EVENT LOCATION PLACEHOLDER"
+        android:hint="EVENT LOCATION PLACEHOLDER"
         android:minWidth="200dp"
         android:gravity="center"
         android:layout_marginTop="40dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NUM GUESTS PLACEHOLDER"
-        android:minWidth="200dp"
-        android:gravity="center"
-        android:layout_marginTop="40dp"
-        android:inputType="number"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -95,7 +128,8 @@
         android:text="Generate\nEvent Code"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"
+        />
 
 
 

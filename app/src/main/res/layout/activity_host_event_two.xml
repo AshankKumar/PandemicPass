@@ -56,19 +56,10 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Event Location"
-        android:minWidth="200dp"
-        android:gravity="center"
-        android:layout_marginTop="60dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Number of Guests"
         android:minWidth="200dp"
         android:gravity="center"
         android:layout_marginTop="60dp"
-        android:inputType="number"/>
+        android:hint="Enter Event Location"/>
 
     <Button
         android:id="@+id/hostEventTwoNextButton"
