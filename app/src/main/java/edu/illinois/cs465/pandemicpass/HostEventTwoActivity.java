@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 
 import java.util.Calendar;
 
@@ -20,10 +21,14 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
     private DatePickerDialog verificationDatePickerDialog;
     private Button eventDateButton;
     private Button verificationDateButton;
+    private EditText eventLocationEditText;
     private Button nextButton;
     private String eventName;
     private boolean vaxAllowed;
     private boolean testAllowed;
+    private int eventMonth;
+    private int eventDay;
+    private int eventYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,12 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
         nextButton = (Button) findViewById(R.id.hostEventTwoNextButton);
         nextButton.setOnClickListener(this);
 
-        // Could put this in its on method
+        eventLocationEditText = (EditText) findViewById(R.id.eventLocationEditText);
+
+        initExtras();
+    }
+
+    private void initExtras() {
         eventName = getIntent().getExtras().getString("event_name");
         vaxAllowed = getIntent().getExtras().getBoolean("vax_allowed");
         testAllowed = getIntent().getExtras().getBoolean("test_allowed");
@@ -64,6 +74,10 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
                 month = month + 1;
                 String date = makeDateString(month, day, year);
                 eventDateButton.setText(date);
+
+                eventYear = year;
+                eventMonth = month;
+                eventDay = day;
             }
         };
 
@@ -142,14 +156,24 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
         int id = v.getId();
 
         if (id == R.id.hostEventTwoNextButton) {
-//            startActivity(new Intent(HostEventTwoActivity.this, HostEventThreeActivity.class));
-            Intent intent = new Intent(this, HostEventThreeActivity.class);
 
-            intent.putExtra("event_name", eventName);
-            intent.putExtra("vax_allowed", vaxAllowed);
-            intent.putExtra("test_allowed", testAllowed);
+            String eventLocation = eventLocationEditText.getText().toString().trim();
+            if (eventLocation.isEmpty()) {
+                eventLocationEditText.setError("Event location is required.");
+                eventLocationEditText.requestFocus();
+            } else {
+                Intent intent = new Intent(this, HostEventThreeActivity.class);
 
-            startActivity(intent);
+                intent.putExtra("event_name", eventName);
+                intent.putExtra("vax_allowed", vaxAllowed);
+                intent.putExtra("test_allowed", testAllowed);
+                intent.putExtra("event_year", eventYear);
+                intent.putExtra("event_month", eventMonth);
+                intent.putExtra("event_day", eventDay);
+                intent.putExtra("event_location", eventLocation);
+
+                startActivity(intent);
+            }
         }
     }
 }

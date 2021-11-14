@@ -4,16 +4,14 @@
     android:layout_height="match_parent">
 
 
-
-
     <TextView
         android:id="@+id/eventCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="EVENT CODE PLACEHOLDER"
-        android:textSize="25sp"
         android:textColor="@color/black"
-        android:layout_centerInParent="true"/>
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/hostEventHomeButton"

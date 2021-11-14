@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class EventCodeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button homeButton;
+    private TextView eventCodeTextView;
+    private String eventCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,11 @@ public class EventCodeActivity extends AppCompatActivity implements View.OnClick
 
         homeButton = (Button) findViewById(R.id.hostEventHomeButton);
         homeButton.setOnClickListener(this);
+
+        eventCodeTextView = (TextView) findViewById(R.id.eventCode);
+
+        eventCode = getIntent().getExtras().getString("event_code");
+        eventCodeTextView.setText(eventCode);
     }
 
     @Override

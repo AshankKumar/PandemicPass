@@ -35,18 +35,23 @@ public class HostEventActivity extends AppCompatActivity implements View.OnClick
         int id = v.getId();
 
         if (id == R.id.hostEventOneNextButton) {
-            Intent intent = new Intent(this, HostEventTwoActivity.class);
-
             String eventStr = eventName.getText().toString().trim();
-            intent.putExtra("event_name", eventStr);
+            if (eventStr.isEmpty()) {
+                eventName.setError("Event name is required.");
+                eventName.requestFocus();
+            } else {
+                Intent intent = new Intent(this, HostEventTwoActivity.class);
 
-            boolean vaxAllowed = vaxSwitch.isChecked();
-            intent.putExtra("vax_allowed", vaxAllowed);
+                intent.putExtra("event_name", eventStr);
 
-            boolean testAllowed = testSwitch.isChecked();
-            intent.putExtra("test_allowed", testAllowed);
+                boolean vaxAllowed = vaxSwitch.isChecked();
+                intent.putExtra("vax_allowed", vaxAllowed);
 
-            startActivity(intent);
+                boolean testAllowed = testSwitch.isChecked();
+                intent.putExtra("test_allowed", testAllowed);
+
+                startActivity(intent);
+            }
         }
     }
 }
