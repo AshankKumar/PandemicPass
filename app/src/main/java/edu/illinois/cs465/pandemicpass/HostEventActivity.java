@@ -6,10 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
 
 public class HostEventActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button nextButton;
+    private EditText eventName;
+    private Switch vaxSwitch;
+    private Switch testSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,11 @@ public class HostEventActivity extends AppCompatActivity implements View.OnClick
 
         nextButton = (Button) findViewById(R.id.hostEventOneNextButton);
         nextButton.setOnClickListener(this);
+
+        eventName = (EditText) findViewById(R.id.eventName);
+
+        vaxSwitch = (Switch) findViewById(R.id.vaxSwitch);
+        testSwitch = (Switch) findViewById(R.id.testSwitch);
     }
 
     @Override
@@ -25,7 +35,18 @@ public class HostEventActivity extends AppCompatActivity implements View.OnClick
         int id = v.getId();
 
         if (id == R.id.hostEventOneNextButton) {
-            startActivity(new Intent(HostEventActivity.this, HostEventTwoActivity.class));
+            Intent intent = new Intent(this, HostEventTwoActivity.class);
+
+            String eventStr = eventName.getText().toString().trim();
+            intent.putExtra("event_name", eventStr);
+
+            boolean vaxAllowed = vaxSwitch.isChecked();
+            intent.putExtra("vax_allowed", vaxAllowed);
+
+            boolean testAllowed = testSwitch.isChecked();
+            intent.putExtra("test_allowed", testAllowed);
+
+            startActivity(intent);
         }
     }
 }

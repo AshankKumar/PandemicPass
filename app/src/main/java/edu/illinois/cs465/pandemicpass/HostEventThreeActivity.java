@@ -10,6 +10,9 @@ import android.widget.Button;
 public class HostEventThreeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button nextButton;
+    private String eventName;
+    private boolean vaxAllowed;
+    private boolean testAllowed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,11 @@ public class HostEventThreeActivity extends AppCompatActivity implements View.On
 
         nextButton = (Button) findViewById(R.id.hostEventThreeNextButton);
         nextButton.setOnClickListener(this);
+
+        // Could put this in its on method
+        eventName = getIntent().getExtras().getString("event_name");
+        vaxAllowed = getIntent().getExtras().getBoolean("vax_allowed");
+        testAllowed = getIntent().getExtras().getBoolean("test_allowed");
     }
 
     @Override
@@ -25,7 +33,14 @@ public class HostEventThreeActivity extends AppCompatActivity implements View.On
         int id = v.getId();
 
         if (id == R.id.hostEventThreeNextButton) {
-            startActivity(new Intent(HostEventThreeActivity.this, HostEventFourActivity.class));
+//            startActivity(new Intent(HostEventThreeActivity.this, HostEventFourActivity.class));
+            Intent intent = new Intent(this, HostEventFourActivity.class);
+
+            intent.putExtra("event_name", eventName);
+            intent.putExtra("vax_allowed", vaxAllowed);
+            intent.putExtra("test_allowed", testAllowed);
+
+            startActivity(intent);
         }
     }
 }

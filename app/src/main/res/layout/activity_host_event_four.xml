@@ -6,6 +6,7 @@
     android:gravity="top|center">
 
     <EditText
+        android:id="@+id/finalEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="EVENT NAME PLACEHOLDER"
@@ -75,6 +76,7 @@
             android:layout_marginRight="30dp"/>
 
         <Switch
+            android:id="@+id/finalVaxSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -96,6 +98,7 @@
             android:layout_marginRight="46dp"/>
 
         <Switch
+            android:id="@+id/finalTestSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />

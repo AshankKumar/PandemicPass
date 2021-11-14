@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import java.util.Calendar;
 
@@ -19,6 +21,13 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
     private DatePickerDialog verificationDatePickerDialog;
     private Button eventDateButton;
     private Button verificationDateButton;
+    private EditText eventNameText;
+    private Switch vaxSwitch;
+    private Switch testSwitch;
+
+    private String eventName;
+    private boolean vaxAllowed;
+    private boolean testAllowed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,18 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
         eventCodeButton = (Button) findViewById(R.id.genEventCode);
         eventCodeButton.setOnClickListener(this);
+
+        eventNameText = (EditText) findViewById(R.id.finalEventName);
+        vaxSwitch = (Switch) findViewById(R.id.finalVaxSwitch);
+        testSwitch = (Switch) findViewById(R.id.finalTestSwitch);
+
+        // Could put this in its on method
+        eventName = getIntent().getExtras().getString("event_name");
+        eventNameText.setText(eventName);
+        vaxAllowed = getIntent().getExtras().getBoolean("vax_allowed");
+        vaxSwitch.setChecked(vaxAllowed);
+        testAllowed = getIntent().getExtras().getBoolean("test_allowed");
+        testSwitch.setChecked(testAllowed);
     }
 
     private void initDatePicker() {

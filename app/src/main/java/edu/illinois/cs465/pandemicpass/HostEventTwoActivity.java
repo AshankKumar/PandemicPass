@@ -21,6 +21,9 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
     private Button eventDateButton;
     private Button verificationDateButton;
     private Button nextButton;
+    private String eventName;
+    private boolean vaxAllowed;
+    private boolean testAllowed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,11 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
 
         nextButton = (Button) findViewById(R.id.hostEventTwoNextButton);
         nextButton.setOnClickListener(this);
+
+        // Could put this in its on method
+        eventName = getIntent().getExtras().getString("event_name");
+        vaxAllowed = getIntent().getExtras().getBoolean("vax_allowed");
+        testAllowed = getIntent().getExtras().getBoolean("test_allowed");
     }
 
     private String getTodaysDate() {
@@ -134,7 +142,14 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
         int id = v.getId();
 
         if (id == R.id.hostEventTwoNextButton) {
-            startActivity(new Intent(HostEventTwoActivity.this, HostEventThreeActivity.class));
+//            startActivity(new Intent(HostEventTwoActivity.this, HostEventThreeActivity.class));
+            Intent intent = new Intent(this, HostEventThreeActivity.class);
+
+            intent.putExtra("event_name", eventName);
+            intent.putExtra("vax_allowed", vaxAllowed);
+            intent.putExtra("test_allowed", testAllowed);
+
+            startActivity(intent);
         }
     }
 }
