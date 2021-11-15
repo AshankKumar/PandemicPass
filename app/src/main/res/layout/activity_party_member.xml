@@ -69,71 +69,9 @@
             android:textStyle="bold"
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Member1"
-            android:textSize="20sp"
-            android:gravity="center"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:text="Status"
-            android:gravity="center"
-            />
-    </LinearLayout>
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Member2"
-            android:textSize="20sp"
-            android:gravity="center"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Status"
-            android:textSize="20sp"
-            android:gravity="center"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Member3"
-            android:textSize="20sp"
-            android:gravity="center"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:text="Status"
-            android:gravity="center"
-            />
-    </LinearLayout>
+        android:layout_height="250dp"
+        android:id="@+id/nameStatusListView"/>
 </LinearLayout>
