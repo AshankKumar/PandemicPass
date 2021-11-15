@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PandemicPass">
         <activity
+            android:name=".EventCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HostEventFourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HostEventThreeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HostEventTwoActivity"
+            android:exported="false" />
+        <activity
             android:name=".EventGuestListForGuestActivity"
             android:exported="true" />
         <activity

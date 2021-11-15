@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top|center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Date and Time"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/eventDatePickerButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Jan 01 2020"
+            style="?spinnerStyle"
+            android:layout_marginLeft="25dp"
+            android:onClick="openEventDatePicker"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verification Deadline"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/verificationDatePickerButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Jan 01 2020"
+            style="?spinnerStyle"
+            android:layout_marginLeft="25dp"
+            android:onClick="openVerificationDatePicker"/>
+    </LinearLayout>
+
+
+
+    <EditText
+        android:id="@+id/eventLocationEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:hint="Enter Event Location"/>
+
+    <Button
+        android:id="@+id/hostEventTwoNextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginTop="100dp"/>
+
+</LinearLayout>
