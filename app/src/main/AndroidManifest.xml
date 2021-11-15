@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PandemicPass">
         <activity
+            android:name=".AddStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditMemberActivity"
+            android:exported="false" />
+        <activity
             android:name=".EventCodeActivity"
             android:exported="false" />
         <activity
