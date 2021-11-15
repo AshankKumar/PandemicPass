@@ -31,7 +31,7 @@
             android:name=".EventDetailsForHostActivity"
             android:exported="true" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".MemberActivity"
             android:exported="true" />
         <activity
             android:name=".ForgotPasswordActivity"
@@ -40,7 +40,7 @@
             android:name=".EventListActivity"
             android:exported="true" />
         <activity
-            android:name=".ProfileListActivity"
+            android:name=".MemberListActivity"
             android:exported="true" />
         <activity
             android:name=".HostEventActivity"

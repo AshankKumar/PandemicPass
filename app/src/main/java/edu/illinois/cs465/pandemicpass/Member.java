@@ -2,7 +2,9 @@ package edu.illinois.cs465.pandemicpass;
 
 import com.google.firebase.database.Exclude;
 
-public class Member {
+import java.io.Serializable;
+
+public class Member implements Serializable {
     @Exclude
     public String id;
 
@@ -16,5 +18,16 @@ public class Member {
         this.name = name;
         this.vaccinationRecordFileName = vaccinationRecordFileName;
         this.testResultFileName = testResultFileName;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof Member)
+                && (this.id.equals(((Member) o).id));
     }
 }

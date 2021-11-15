@@ -49,7 +49,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         }
         else if (id == R.id.userProfile) {
             // TODO for tony
-            startActivity(new Intent(HomeScreenActivity.this, DbTestActivity.class));
+            startActivity(new Intent(HomeScreenActivity.this, MemberListActivity.class));
         }
     }
 }
