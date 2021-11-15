@@ -70,6 +70,9 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
                 DateFormat.LONG, DateFormat.LONG,
                 Locale.getDefault());
         calendar = Calendar.getInstance();
+
+        // testing out a bunch of events objects (Zhengyu)
+        Event event1 = new Event();
     }
 
     @Override
