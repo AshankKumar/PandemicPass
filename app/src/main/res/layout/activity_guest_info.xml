@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -25,7 +26,7 @@
             android:gravity="center"
             android:textColor="@color/app_blue"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Members"
+            android:text="Member Name"
             android:textSize="30dp" />
     </LinearLayout>
 
@@ -38,12 +39,32 @@
         android:orientation="vertical">
 
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listview">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="204dp"
+            android:layout_height="171dp"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
 
-        </ListView>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Upload Test"
+            android:textColor="@color/white"
+            />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="204dp"
+            android:layout_height="171dp"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Upload Vaccine"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>
