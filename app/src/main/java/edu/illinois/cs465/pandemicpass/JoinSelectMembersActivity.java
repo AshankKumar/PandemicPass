@@ -35,6 +35,7 @@ public class JoinSelectMembersActivity extends AppCompatActivity implements View
     private String eventCode;
     private String eventName;
     private String eventId;
+    private String eventDate;
 
     private TextView eventNameTextView;
     private Button join;
@@ -53,10 +54,15 @@ public class JoinSelectMembersActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_join_select_members);
 
         if (getIntent() != null && getIntent().getExtras() != null
-                && getIntent().hasExtra("eventCode")) {
+                && getIntent().hasExtra("eventCode")
+                && getIntent().hasExtra("eventName")
+                && getIntent().hasExtra("eventId")
+                && getIntent().hasExtra("eventDate")
+        ) {
             eventCode = getIntent().getExtras().getString("eventCode");
             eventName = getIntent().getExtras().getString("eventName");
             eventId = getIntent().getExtras().getString("eventId");
+            eventDate = getIntent().getExtras().getString("eventDate");
         }
         else {
             return;
@@ -172,6 +178,9 @@ public class JoinSelectMembersActivity extends AppCompatActivity implements View
         String ea_key = dbReferenceUserWithUserId.child("eventAttendance").push().getKey();
         DatabaseReference ea_ref = dbReferenceUserWithUserId.child("eventAttendance").child(ea_key);
         ea_ref.child("eventId").setValue(eventId);
+        ea_ref.child("eventName").setValue(eventName);
+        ea_ref.child("eventDate").setValue(eventDate);
+        
         for (Member m : attendingMemberList) {
             AttendingMemberInfo aInfo = new AttendingMemberInfo(m.id);
             ea_ref.child("attendingMemberList").push().setValue(aInfo);
