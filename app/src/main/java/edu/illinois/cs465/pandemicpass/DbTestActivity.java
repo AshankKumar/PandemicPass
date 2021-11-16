@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -29,7 +30,9 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
 
     private String userId;
     private Calendar calendar;
-    private DateFormat dateFormat;
+    private DateFormat dateFormatOnlyDate;
+    private DateFormat dateFormatOnlyTime;
+
     private DatabaseReference dbReferenceEvent;
     private DatabaseReference dbReferenceUser;
 
@@ -66,9 +69,9 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
         getMembers.setOnClickListener(this);
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        dateFormat = DateFormat.getDateTimeInstance(
-                DateFormat.LONG, DateFormat.LONG,
-                Locale.getDefault());
+        dateFormatOnlyDate = DateFormat.getDateInstance();
+        dateFormatOnlyTime = DateFormat.getTimeInstance(DateFormat.SHORT);
+
         calendar = Calendar.getInstance();
 
         // testing out a bunch of events objects (Zhengyu)
@@ -102,7 +105,10 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
-                    Event event = new Event(userId, "tony", generated_code, "tony's event", dateFormat.format(calendar.getTime()), "home", "11123", new ArrayList<Guest>(), true, true);
+                    String eventDate = dateFormatOnlyDate.format(calendar.getTime());
+                    String eventTime = dateFormatOnlyTime.format(calendar.getTime());
+
+                    Event event = new Event(userId, "tony", generated_code, "tony's event", eventDate, eventTime, "home", "11123", new HashMap<String, Guest>(), true, true);
 
                     dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

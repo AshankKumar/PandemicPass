@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PandemicPass">
         <activity
-            android:name=".EventCodeActivity"
+            android:name=".JoinSelectMembersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".JoinEventCodeActivity"
             android:exported="false" />
         <activity
             android:name=".HostEventFourActivity"
@@ -28,10 +31,13 @@
             android:name=".EventGuestListForHostActivity"
             android:exported="true" />
         <activity
+            android:name=".EventDetailsForGuestActivity"
+            android:exported="true" />
+        <activity
             android:name=".EventDetailsForHostActivity"
             android:exported="true" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".MemberActivity"
             android:exported="true" />
         <activity
             android:name=".ForgotPasswordActivity"
@@ -40,7 +46,7 @@
             android:name=".EventListActivity"
             android:exported="true" />
         <activity
-            android:name=".ProfileListActivity"
+            android:name=".MemberListActivity"
             android:exported="true" />
         <activity
             android:name=".HostEventActivity"

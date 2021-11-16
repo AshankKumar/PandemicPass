@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -56,6 +56,10 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
     private DatabaseReference dbReferenceEvent;
     private DatabaseReference dbReferenceUser;
+
+    private DateFormat dateFormatOnlyDate;
+    private DateFormat dateFormatOnlyTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,9 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                 Locale.getDefault());
 
         initExtras();
+
+        dateFormatOnlyDate = DateFormat.getDateInstance();
+        dateFormatOnlyTime = DateFormat.getTimeInstance(DateFormat.SHORT);
     }
 
     private void initExtras() {
@@ -219,7 +226,8 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
             Calendar calendar = Calendar.getInstance();
             // Need month - 1 cuz DatePickerDialog is weird
             calendar.set(eventYear, eventMonth - 1, eventDay);
-            String eventDate = dateFormat.format(calendar.getTime());
+            String eventDate = dateFormatOnlyDate.format(calendar.getTime());
+            String eventTime = dateFormatOnlyTime.format(calendar.getTime());
 
             if (eventName.isEmpty()) {
                 eventNameText.setError("Event name is required.");
@@ -238,7 +246,7 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (!snapshot.exists()) {
-                            Event event = new Event(userId, "Ashank", eventCode, eventName, eventDate, eventLocation, eventDescription, new ArrayList<Guest>(), vaxAllowed, testAllowed);
+                            Event event = new Event(userId, "Ashank", eventCode, eventName, eventDate, eventTime, eventLocation, eventDescription, new HashMap<String, Guest>(), vaxAllowed, testAllowed);
                             dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -263,7 +271,7 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
                     }
                 });
-                Intent intent = new Intent(this, EventCodeActivity.class);
+                Intent intent = new Intent(this, JoinEventCodeActivity.class);
 
                 intent.putExtra("event_code", eventCode);
 
