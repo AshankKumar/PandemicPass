@@ -95,7 +95,7 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
         initExtras();
 
-        dateFormatOnlyDate = DateFormat.getDateTimeInstance();
+        dateFormatOnlyDate = DateFormat.getDateInstance();
         dateFormatOnlyTime = DateFormat.getTimeInstance(DateFormat.SHORT);
     }
 

@@ -69,7 +69,7 @@ public class DbTestActivity extends AppCompatActivity implements View.OnClickLis
         getMembers.setOnClickListener(this);
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        dateFormatOnlyDate = DateFormat.getDateTimeInstance();
+        dateFormatOnlyDate = DateFormat.getDateInstance();
         dateFormatOnlyTime = DateFormat.getTimeInstance(DateFormat.SHORT);
 
         calendar = Calendar.getInstance();
