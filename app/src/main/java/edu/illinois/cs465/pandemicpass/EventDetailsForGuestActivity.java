@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,10 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
     private String userId;
     private String eventId;
 
+    private String eventName;
+    private String eventDate;
+    private String eventTime;
+
     private TextView eventNameTextView;
     private TextView hostTextView;
     private TextView dateTextView;
@@ -36,6 +41,7 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
     private ListView attendingMemberListView;
     private Button editPartyMembers;
     private Button updateStatuses;
+    private Button viewGuestList;
     private int totalGuests;
     private int guestsApproved;
 
@@ -75,6 +81,9 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
 
         updateStatuses = (Button) findViewById(R.id.updateStatuses);
         updateStatuses.setOnClickListener(this);
+
+        viewGuestList = (Button) findViewById(R.id.guestList);
+        viewGuestList.setOnClickListener(this);
 
         dbReferenceEventWithEventId = FirebaseDatabase.getInstance().getReference("Event").child(eventId);
         dbReferenceEventWithEventIdGuestList = dbReferenceEventWithEventId.child("guestList");
@@ -174,6 +183,10 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
     }
 
     private void loadEventDetails(Event e) {
+        eventName = e.eventName;
+        eventDate = e.date;
+        eventTime = e.time;
+
         eventNameTextView.setText(e.eventName);
         hostTextView.setText(e.hostName);
         dateTextView.setText(e.date);
@@ -220,9 +233,21 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
         if (id == R.id.editPartyMembers) {
             //TODO
         }
-
         else if (id == R.id.updateStatuses) {
             //TODO
         }
+        else if (id == R.id.guestList) {
+            goToGuestList();
+        }
+    }
+
+    private void goToGuestList() {
+        Intent guestListForGuestIntent = new Intent(EventDetailsForGuestActivity.this, GuestListForGuestsActivity.class);
+        guestListForGuestIntent.putExtra("eventId", eventId);
+        guestListForGuestIntent.putExtra("eventName", eventName);
+        guestListForGuestIntent.putExtra("eventDate", eventDate);
+        guestListForGuestIntent.putExtra("eventTime", eventTime);
+        startActivity(guestListForGuestIntent);
+
     }
 }
