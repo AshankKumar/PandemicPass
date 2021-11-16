@@ -39,7 +39,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         int id = view.getId();
 
         if (id == R.id.joinEvent) {
-            startActivity(new Intent(HomeScreenActivity.this, JoinEventActivity.class));
+            startActivity(new Intent(HomeScreenActivity.this, JoinEventCodeActivity.class));
         }
         else if (id == R.id.hostEvent) {
             startActivity(new Intent(HomeScreenActivity.this, HostEventActivity.class));

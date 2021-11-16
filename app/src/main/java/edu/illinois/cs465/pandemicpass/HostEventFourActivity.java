@@ -27,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -263,7 +262,7 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
                     }
                 });
-                Intent intent = new Intent(this, EventCodeActivity.class);
+                Intent intent = new Intent(this, JoinEventCodeActivity.class);
 
                 intent.putExtra("event_code", eventCode);
 

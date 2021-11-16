@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PandemicPass">
         <activity
-            android:name=".EventCodeActivity"
+            android:name=".JoinSelectMembersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".JoinEventCodeActivity"
             android:exported="false" />
         <activity
             android:name=".HostEventFourActivity"
