@@ -179,5 +179,9 @@ public class JoinSelectMembersActivity extends AppCompatActivity implements View
             dbReferenceEventWithEventId.child("guestList").push().setValue(eInfo);
         }
 
+        // redirect to guest event list view
+        // put event id
+        // view should pull event data for guest
+        
     }
 }
