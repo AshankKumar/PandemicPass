@@ -27,52 +27,125 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/host"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Host: "
-                android:textSize="16dp"
-                android:layout_marginBottom="10dp"></TextView>
+                android:weightSum="100"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="12"
+                    android:layout_height="wrap_content"
+                    android:text="Host: "
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/host"
+                    android:layout_width="0dp"
+                    android:layout_weight="88"
+                    android:layout_height="wrap_content"
+                    android:text="string"
+                    android:textSize="16sp"></TextView>
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="12"
+                android:layout_height="wrap_content"
+                android:text="Date: "
+                android:textSize="16sp"></TextView>
 
             <TextView
                 android:id="@+id/date"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="88"
                 android:layout_height="wrap_content"
-                android:text="Date: "
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"></TextView>
+                android:text="string"
+                android:textSize="16sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="12"
+                android:layout_height="wrap_content"
+                android:text="Time: "
+                android:textSize="16sp"></TextView>
 
             <TextView
                 android:id="@+id/time"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="88"
                 android:layout_height="wrap_content"
-                android:text="Time: "
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"></TextView>
+                android:text="string"
+                android:textSize="16sp"></TextView>
+        </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="20"
+                android:layout_height="wrap_content"
+                android:text="Location: "
+                android:textSize="16sp"></TextView>
 
             <TextView
                 android:id="@+id/location"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="80"
                 android:layout_height="wrap_content"
-                android:text="Location: "
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"></TextView>
+                android:text="string"
+                android:textSize="16sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="33"
+                android:layout_height="wrap_content"
+                android:text="Requirement(s): "
+                android:textSize="16sp"></TextView>
 
             <TextView
                 android:id="@+id/requirements"
+                android:layout_width="0dp"
+                android:layout_weight="67"
+                android:layout_height="wrap_content"
+                android:text="string"
+                android:textSize="16sp"></TextView>
+        </LinearLayout>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Requirements: "
+                android:text="Description: "
                 android:textSize="16sp"
-                android:layout_marginBottom="10dp"></TextView>
+                android:background="@color/browser_actions_bg_grey"></TextView>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description: "
+                android:text="string"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/browser_actions_bg_grey"></TextView>
@@ -81,7 +154,7 @@
                 android:id="@+id/proportionOfGuestsApproved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="_ of guests _ approved"
+                android:text="_ of _ guests approved"
                 android:textSize="16sp"
                 android:layout_marginBottom="10dp"></TextView>
 
@@ -103,7 +176,7 @@
             <ListView
                 android:id="@+id/attendingMemberList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="100dp">
             </ListView>
 
             <LinearLayout

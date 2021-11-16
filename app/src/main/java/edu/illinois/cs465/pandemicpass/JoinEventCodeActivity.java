@@ -71,6 +71,7 @@ public class JoinEventCodeActivity extends AppCompatActivity implements View.OnC
                     }
                     selectMembersIntent.putExtra("eventCode", eventCode);
                     startActivity(selectMembersIntent);
+                    JoinEventCodeActivity.this.finish();
                 }
             }
 

@@ -182,5 +182,6 @@ public class JoinSelectMembersActivity extends AppCompatActivity implements View
         Intent eventDetailsForGuestIntent = new Intent(JoinSelectMembersActivity.this, EventDetailsForGuestActivity.class);
         eventDetailsForGuestIntent.putExtra("eventId", eventId);
         startActivity(eventDetailsForGuestIntent);
+        JoinSelectMembersActivity.this.finish();
     }
 }
