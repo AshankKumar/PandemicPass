@@ -64,9 +64,12 @@ public class JoinEventCodeActivity extends AppCompatActivity implements View.OnC
                     Intent selectMembersIntent = new Intent(JoinEventCodeActivity.this, JoinSelectMembersActivity.class);
                     for(DataSnapshot snap: snapshot.getChildren()) {
                         String eventId = snap.getKey();
-                        String eventName = ((Event) snap.getValue(Event.class)).eventName;
+                        Event e = (Event) snap.getValue(Event.class);
+                        String eventName = e.eventName;
+                        String eventDate = e.date;
                         selectMembersIntent.putExtra("eventId", eventId);
                         selectMembersIntent.putExtra("eventName", eventName);
+                        selectMembersIntent.putExtra("eventDate", eventDate);
                         break;
                     }
                     selectMembersIntent.putExtra("eventCode", eventCode);
