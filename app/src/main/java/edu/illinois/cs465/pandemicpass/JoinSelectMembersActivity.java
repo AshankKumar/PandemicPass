@@ -175,13 +175,12 @@ public class JoinSelectMembersActivity extends AppCompatActivity implements View
         for (Member m : attendingMemberList) {
             AttendingMemberInfo aInfo = new AttendingMemberInfo(m.id);
             ea_ref.child("attendingMemberList").push().setValue(aInfo);
-            EventSingleGuestInfo eInfo = new EventSingleGuestInfo(userId, m.id, "No decision");
-            dbReferenceEventWithEventId.child("guestList").push().setValue(eInfo);
+            Guest guest = new Guest(userId, m.id, m.name,"No decision");
+            dbReferenceEventWithEventId.child("guestList").push().setValue(guest);
         }
 
-        // redirect to guest event list view
-        // put event id
-        // view should pull event data for guest
-        
+        Intent eventDetailsForGuestIntent = new Intent(JoinSelectMembersActivity.this, EventDetailsForGuestActivity.class);
+        eventDetailsForGuestIntent.putExtra("eventId", eventId);
+        startActivity(eventDetailsForGuestIntent);
     }
 }
