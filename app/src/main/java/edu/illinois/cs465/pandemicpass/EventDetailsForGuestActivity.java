@@ -109,13 +109,13 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
 
                 if (guest.userId.equals(userId)) {
                     guestsInUserGroupAttending.add(guest);
-                    attendingMemberListAdapter.notifyDataSetChanged();
                 }
                 totalGuests += 1;
                 if (guest.approvalStatus.equals("Approved")) {
                     guestsApproved += 1;
-                    updateProportionOfGuestsApprovedTextView();
                 }
+                updateProportionOfGuestsApprovedTextView();
+                attendingMemberListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -130,15 +130,14 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
                     if (!previousApprovalStatus.equals(newApprovalStatus)) {
                         if (newApprovalStatus.equals("Approved")) {
                             guestsApproved += 1;
-                            updateProportionOfGuestsApprovedTextView();
                         }
                         else if (previousApprovalStatus.equals("Approved")) {
                             guestsApproved -= 1;
-                            updateProportionOfGuestsApprovedTextView();
                         }
                     }
 
                     guestsInUserGroupAttending.set(index, guest);
+                    updateProportionOfGuestsApprovedTextView();
                     attendingMemberListAdapter.notifyDataSetChanged();
                 }
             }
@@ -153,11 +152,11 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
 
                     if (previousApprovalStatus.equals("Approved")) {
                         guestsApproved -= 1;
-                        updateProportionOfGuestsApprovedTextView();
                     }
 
                     guestsInUserGroupAttending.remove(guest);
                     totalGuests -= 1;
+                    updateProportionOfGuestsApprovedTextView();
                     attendingMemberListAdapter.notifyDataSetChanged();
                 }
             }
