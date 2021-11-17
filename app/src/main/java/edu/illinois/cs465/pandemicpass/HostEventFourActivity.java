@@ -271,7 +271,9 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
                     }
                 });
-                Intent intent = new Intent(this, JoinEventCodeActivity.class);
+
+                //Change this to go to EventCodeActivity
+                Intent intent = new Intent(this, HostEventCodeActivity.class);
 
                 intent.putExtra("event_code", eventCode);
 
