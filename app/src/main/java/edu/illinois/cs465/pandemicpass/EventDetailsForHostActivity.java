@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,8 +44,13 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
         // This is for when the host comes from HostEventCodeActivity.java
         if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("event_code")) {
+            Log.d("DEBUG", "Got Event Code");
             eventCode = getIntent().getExtras().getString("event_code");
-        } // need an else if for when host comes from View Events screen
+        } else if (getIntent() != null && getIntent().getExtras() != null
+                && getIntent().hasExtra("event_id")) {
+            eventId = getIntent().getExtras().getString("event_id");
+            Log.d("DEBUG", eventId);
+        }
 
         EventNameTextView = (TextView) findViewById(R.id.HostViewEventName);
         EventDateTextView = (TextView) findViewById(R.id.HostViewEventDate);
@@ -67,6 +73,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
         ShareCodeButton.setOnClickListener(this);
 
         dbReferenceEvent = FirebaseDatabase.getInstance().getReference("Event");
+        dbReferenceEvent.keepSynced(true);
 
         hostId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -74,25 +81,31 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
     }
 
     private void getEventDetails() {
-        dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap: snapshot.getChildren()) {
-                    eventId = snap.getKey();
-                    event = (Event) snap.getValue(Event.class);
-                    break;
+        if (eventCode != null) {
+            Log.d("DEBUG", "Getting event details from event code");
+            dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        eventId = snap.getKey();
+                        event = (Event) snap.getValue(Event.class);
+                        break;
+                    }
+                    renderScreen();
                 }
-                renderScreen();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
+
     private void renderScreen() {
+        Log.d("DEBUG", "Rendering");
+
         EventNameTextView.setText(event.eventName);
         EventDateTextView.setText(event.date);
         EventCodeTextView.setText(eventCode);
@@ -145,6 +158,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
             intent.putExtra("event_day", event.getDay());
             intent.putExtra("event_location", event.location);
             intent.putExtra("event_description", event.description);
+            intent.putExtra("event_code", eventCode);
 
             startActivity(intent);
         }

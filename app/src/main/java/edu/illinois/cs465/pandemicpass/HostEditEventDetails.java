@@ -1,26 +1,39 @@
 package edu.illinois.cs465.pandemicpass;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.UUID;
 
 public class HostEditEventDetails extends AppCompatActivity implements View.OnClickListener {
 
     private Button eventCodeButton;
+    private Button submitChangesButton;
     private DatePickerDialog datePickerDialog;
     private Button eventDateButton;
     private EditText eventNameText;
@@ -32,6 +45,8 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
     private String eventName;
     private String eventLocation;
     private String eventDescription;
+    private String eventCode;
+    private String eventId;
     private boolean vaxAllowed;
     private boolean testAllowed;
     private int eventMonth;
@@ -62,6 +77,9 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
 
         eventCodeButton = (Button) findViewById(R.id.finalizeEventDetails);
         eventCodeButton.setOnClickListener(this);
+
+        submitChangesButton = (Button) findViewById(R.id.finalizeEventDetails);
+        submitChangesButton.setOnClickListener(this);
 
         eventNameText = (EditText) findViewById(R.id.EditEventName);
         eventLocationEditText = (EditText) findViewById(R.id.EditEventLocationEditText);
@@ -97,6 +115,8 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
         eventLocationEditText.setText(eventLocation);
         eventDescription = getIntent().getExtras().getString("event_description");
         eventDescriptionEditText.setText(eventDescription);
+
+        eventCode = getIntent().getExtras().getString("event_code");
     }
 
     private void initDatePicker() {
@@ -169,9 +189,74 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
         datePickerDialog.show();
     }
 
+    private void updateEvent(String eventName, String eventLocation, String eventDescription, boolean vaxAllowed, boolean testAllowed, String eventDate, String eventTime) {
+        dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    eventId = objSnapshot.getKey();
+                    break;
+                }
+
+                dbReferenceEvent.child(eventId).child("eventName").setValue(eventName);
+                dbReferenceEvent.child(eventId).child("location").setValue(eventLocation);
+                dbReferenceEvent.child(eventId).child("description").setValue(eventDescription);
+                dbReferenceEvent.child(eventId).child("acceptVaccinationRecord").setValue(vaxAllowed);
+                dbReferenceEvent.child(eventId).child("acceptTestResult").setValue(testAllowed);
+                dbReferenceEvent.child(eventId).child("date").setValue(eventDate);
+                dbReferenceEvent.child(eventId).child("time").setValue(eventTime);
+
+
+                Intent intent = new Intent(HostEditEventDetails.this, EventDetailsForHostActivity.class);
+
+                intent.putExtra("event_code", eventCode);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
+        int id = v.getId();
 
+        if (id == R.id.finalizeEventDetails) {
+            String eventName = eventNameText.getText().toString().trim();
+            String eventLocation = eventLocationEditText.getText().toString();
+            String eventDescription = eventDescriptionEditText.getText().toString();
+            boolean vaxAllowed = vaxSwitch.isChecked();
+            boolean testAllowed = testSwitch.isChecked();
+            Calendar calendar = Calendar.getInstance();
+            // Need month - 1 cuz DatePickerDialog is weird
+            calendar.set(eventYear, eventMonth - 1, eventDay);
+            String eventDate = dateFormatOnlyDate.format(calendar.getTime());
+            String eventTime = dateFormatOnlyTime.format(calendar.getTime());
+
+            if (eventName.isEmpty()) {
+                eventNameText.setError("Event name is required.");
+                eventNameText.requestFocus();
+            } else if (eventLocation.isEmpty()) {
+                eventLocationEditText.setError("Event location is required.");
+                eventLocationEditText.requestFocus();
+            } else if (eventDescription.isEmpty()) {
+                eventDescriptionEditText.setError("Event description is required.");
+                eventDescriptionEditText.requestFocus();
+            } else {
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                updateEvent(eventName, eventLocation, eventDescription, vaxAllowed, testAllowed, eventDate, eventTime);
+            }
+//
+//            Intent intent = new Intent(this, EventDetailsForHostActivity.class);
+//
+//            intent.putExtra("event_key", eventKey);
+//
+//            System.out.println("Here");
+//            startActivity(intent);
+        }
     }
 }

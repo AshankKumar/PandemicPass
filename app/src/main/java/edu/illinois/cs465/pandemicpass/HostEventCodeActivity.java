@@ -59,7 +59,6 @@ public class HostEventCodeActivity extends AppCompatActivity implements View.OnC
             EmailAndTextIntent();
         } else if (id == R.id.ViewEventButton) {
             Intent intent = new Intent(HostEventCodeActivity.this, EventDetailsForHostActivity.class);
-//            startActivity(new Intent(HostEventCodeActivity.this, EventDetailsForHostActivity.class));
             intent.putExtra("event_code", eventCode);
             startActivity(intent);
         }
