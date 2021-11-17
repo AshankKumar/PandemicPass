@@ -16,6 +16,7 @@ public class Event {
     public HashMap<String, Guest> guestList;
     public boolean acceptVaccinationRecord;
     public boolean acceptTestResult;
+    public String id;
 
     public Event() {}
 
