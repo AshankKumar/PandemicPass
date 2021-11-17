@@ -35,4 +35,50 @@ public class Event {
         this.acceptTestResult = acceptTestResult;
     }
 
+    private int getMonthFormat(String month) {
+        if (month.equals("Jan"))
+            return 1;
+        if (month.equals("Feb"))
+            return 2;
+        if (month.equals("Mar"))
+            return 3;
+        if (month.equals("Apr"))
+            return 4;
+        if (month.equals("May"))
+            return 5;
+        if (month.equals("Jun"))
+            return 6;
+        if (month.equals("Jul"))
+            return 7;
+        if (month.equals("Aug"))
+            return 8;
+        if (month.equals("Sep"))
+            return 9;
+        if (month.equals("Oct"))
+            return 10;
+        if (month.equals("Nov"))
+            return 11;
+        if (month.equals("Dec"))
+            return 12;
+        return 1;
+    }
+
+    public int getMonth() {
+        String [] splitted = date.split(" ");
+        return getMonthFormat(splitted[0]);
+    }
+
+    public int getDay() {
+        String [] splitted = date.split(" ");
+        String month = splitted[1];
+        int sepPos = month.indexOf(",");
+        month = month.substring(0, sepPos);
+
+        return Integer.parseInt(month);
+    }
+
+    public int getYear() {
+        String [] splitted = date.split(" ");
+        return Integer.parseInt(splitted[2]);
+    }
 }

@@ -58,7 +58,10 @@ public class HostEventCodeActivity extends AppCompatActivity implements View.OnC
         } else if (id == R.id.ShareCodeButton) {
             EmailAndTextIntent();
         } else if (id == R.id.ViewEventButton) {
-            startActivity(new Intent(HostEventCodeActivity.this, EventDetailsForHostActivity.class));
+            Intent intent = new Intent(HostEventCodeActivity.this, EventDetailsForHostActivity.class);
+//            startActivity(new Intent(HostEventCodeActivity.this, EventDetailsForHostActivity.class));
+            intent.putExtra("event_code", eventCode);
+            startActivity(intent);
         }
     }
 }

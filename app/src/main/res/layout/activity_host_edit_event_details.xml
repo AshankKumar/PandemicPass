@@ -6,7 +6,7 @@
     android:gravity="top|center">
 
     <EditText
-        android:id="@+id/finalEventName"
+        android:id="@+id/EditEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="EVENT NAME PLACEHOLDER"
@@ -28,7 +28,7 @@
             android:textSize="15sp"/>
 
         <Button
-            android:id="@+id/eventDatePickerButtonSummary"
+            android:id="@+id/eventDatePickerButtonEdit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Jan 01 2020"
@@ -53,7 +53,7 @@
             android:layout_marginRight="30dp"/>
 
         <Switch
-            android:id="@+id/finalVaxSwitch"
+            android:id="@+id/EditVaxSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -75,7 +75,7 @@
             android:layout_marginRight="46dp"/>
 
         <Switch
-            android:id="@+id/finalTestSwitch"
+            android:id="@+id/EditTestSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -83,7 +83,7 @@
 
 
     <EditText
-        android:id="@+id/finalEventLocationEditText"
+        android:id="@+id/EditEventLocationEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="EVENT LOCATION PLACEHOLDER"
@@ -92,7 +92,7 @@
         android:layout_marginTop="40dp"/>
 
     <EditText
-        android:id="@+id/finalEventDescriptionEditText"
+        android:id="@+id/EditEventDescriptionEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="200dp"
@@ -104,10 +104,10 @@
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non dapibus enim, ac condimentum lacus. Suspendisse at dapibus elit. Donec dictum sapien non tortor scelerisque tincidunt. Morbi aliquet et lacus in ornare. Vivamus sollicitudin eget urna eget fringilla. Sed sollicitudin fringilla lobortis. Donec nec nisl vel odio euismod ullamcorper. Etiam ornare purus ac quam auctor, in luctus velit feugiat. In vulputate dolor eget augue convallis consequat. Donec sed arcu neque."/>
 
     <Button
-        android:id="@+id/genEventCode"
+        android:id="@+id/finalizeEventDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate\nEvent Code"
+        android:text="Submit\nUpdates"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_marginTop="30dp"

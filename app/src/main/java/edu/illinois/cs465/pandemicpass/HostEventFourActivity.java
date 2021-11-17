@@ -254,36 +254,6 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                     }
                 });
 
-//                dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if (!snapshot.exists()) {
-//                            Event event = new Event(userId, "Ashank", eventCode, eventName, eventDate, eventTime, eventLocation, eventDescription, new HashMap<String, Guest>(), vaxAllowed, testAllowed);
-//                            dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//
-//                                    if (task.isSuccessful()) {
-//                                        // will probably remove the toast for success and just redirect instead
-//                                        Toast.makeText(HostEventFourActivity.this, "Success", Toast.LENGTH_LONG).show();
-//                                    } else {
-//                                        Toast.makeText(HostEventFourActivity.this, "Fail", Toast.LENGTH_LONG).show();
-//                                    }
-//
-//                                }
-//                            });
-//                        }
-//                        else {
-//                            Log.e("firebase", "duplicate key");
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-
                 Intent intent = new Intent(this, HostEventCodeActivity.class);
 
                 intent.putExtra("event_code", eventCode);
