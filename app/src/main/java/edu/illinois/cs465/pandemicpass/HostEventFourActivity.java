@@ -35,9 +35,7 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
     private Button eventCodeButton;
     private DatePickerDialog datePickerDialog;
-    private DatePickerDialog verificationDatePickerDialog;
     private Button eventDateButton;
-    private Button verificationDateButton;
     private EditText eventNameText;
     private EditText eventLocationEditText;
     private EditText eventDescriptionEditText;
@@ -75,10 +73,6 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
         initDatePicker();
         eventDateButton = findViewById(R.id.eventDatePickerButtonSummary);
         eventDateButton.setText(getTodaysDate());
-
-        initVerificationDatePicker();
-        verificationDateButton = findViewById(R.id.verificationDatePickerButtonSummary);
-        verificationDateButton.setText(getTodaysDate());
 
         eventCodeButton = (Button) findViewById(R.id.genEventCode);
         eventCodeButton.setOnClickListener(this);
@@ -143,26 +137,6 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
     }
 
-    private void initVerificationDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month + 1;
-                String date = makeDateString(month, day, year);
-                verificationDateButton.setText(date);
-            }
-        };
-
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        int style = AlertDialog.THEME_HOLO_LIGHT;
-
-        verificationDatePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
-    }
-
     private String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -207,10 +181,6 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
 
     public void openEventDatePicker(View view) {
         datePickerDialog.show();
-    }
-
-    public void openVerificationDatePicker(View view) {
-        verificationDatePickerDialog.show();
     }
 
     @Override
