@@ -11,13 +11,7 @@
         android:layout_height="120dp"
         android:paddingLeft= "20dp"
         android:paddingRight="20dp">
-        <Button
-            android:id="@+id/backMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="back"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -41,38 +35,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <Button
+            <TextView
+                android:id="@+id/AttendingTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="current"
-                android:textColor="@color/white"/>
+                android:text="Attending"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:onClick="onClick"
+                android:clickable="true"/>
 
-            <Button
+            <TextView
+                android:id="@+id/HostingTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="past"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="hosting"
-                android:textColor="@color/white"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="attending"
-                android:textColor="@color/white"/>
+                android:text="Hosting"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:onClick="onClick"
+                android:clickable="true"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,12 +82,26 @@
                 android:layout_weight="50"
                 android:textColor="@color/black"/>
         </LinearLayout>
+
+<!--        <ViewFlipper-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listview">
+            android:id="@+id/listViewHosting">
 
         </ListView>
+
+<!--            <ListView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:id="@+id/listViewAttending">-->
+
+<!--            </ListView>-->
+<!--        </ViewFlipper>-->
+
     </LinearLayout>
 
 </LinearLayout>
