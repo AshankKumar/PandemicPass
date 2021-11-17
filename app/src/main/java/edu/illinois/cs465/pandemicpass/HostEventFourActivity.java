@@ -212,28 +212,40 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String eventCode = UUID.randomUUID().toString().substring(0, 7);
 
-                dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
+                dbReferenceUser.child(userId).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (!snapshot.exists()) {
-                            Event event = new Event(userId, "Ashank", eventCode, eventName, eventDate, eventTime, eventLocation, eventDescription, new HashMap<String, Guest>(), vaxAllowed, testAllowed);
-                            dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                        String userEmail = snapshot.getValue(String.class);
 
-                                    if (task.isSuccessful()) {
-                                        // will probably remove the toast for success and just redirect instead
-                                        Toast.makeText(HostEventFourActivity.this, "Success", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(HostEventFourActivity.this, "Fail", Toast.LENGTH_LONG).show();
-                                    }
+                        dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!snapshot.exists()) {
+                                    Event event = new Event(userId, userEmail, eventCode, eventName, eventDate, eventTime, eventLocation, eventDescription, new HashMap<String, Guest>(), vaxAllowed, testAllowed);
+                                    dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
 
+                                            if (task.isSuccessful()) {
+                                                // will probably remove the toast for success and just redirect instead
+                                                Toast.makeText(HostEventFourActivity.this, "Success", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(HostEventFourActivity.this, "Fail", Toast.LENGTH_LONG).show();
+                                            }
+
+                                        }
+                                    });
                                 }
-                            });
-                        }
-                        else {
-                            Log.e("firebase", "duplicate key");
-                        }
+                                else {
+                                    Log.e("firebase", "duplicate key");
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
 
                     @Override
@@ -242,7 +254,36 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                     }
                 });
 
-                //Change this to go to EventCodeActivity
+//                dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        if (!snapshot.exists()) {
+//                            Event event = new Event(userId, "Ashank", eventCode, eventName, eventDate, eventTime, eventLocation, eventDescription, new HashMap<String, Guest>(), vaxAllowed, testAllowed);
+//                            dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                    if (task.isSuccessful()) {
+//                                        // will probably remove the toast for success and just redirect instead
+//                                        Toast.makeText(HostEventFourActivity.this, "Success", Toast.LENGTH_LONG).show();
+//                                    } else {
+//                                        Toast.makeText(HostEventFourActivity.this, "Fail", Toast.LENGTH_LONG).show();
+//                                    }
+//
+//                                }
+//                            });
+//                        }
+//                        else {
+//                            Log.e("firebase", "duplicate key");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+
                 Intent intent = new Intent(this, HostEventCodeActivity.class);
 
                 intent.putExtra("event_code", eventCode);
