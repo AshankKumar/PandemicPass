@@ -185,6 +185,12 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
             intent.putExtra("event_code", eventCode);
 
             startActivity(intent);
+        } else if (id == R.id.HostViewGuestsButton) {
+            Intent intent = new Intent(this, EventGuestListForHostActivity.class);
+
+            intent.putExtra("event_id", eventId);
+
+            startActivity(intent);
         }
     }
 }

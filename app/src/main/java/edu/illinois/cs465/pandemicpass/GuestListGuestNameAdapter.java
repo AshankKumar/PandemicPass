@@ -29,12 +29,16 @@ public class GuestListGuestNameAdapter extends ArrayAdapter<Guest> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String name = getItem(position).name;
+        String approvalStatus = getItem(position).approvalStatus;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
 
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.name);
+        TextView nameTextView = (TextView) convertView.findViewById(R.id.guestListName);
         nameTextView.setText(name);
+
+        TextView statusTextView = (TextView) convertView.findViewById(R.id.guestListStatus);
+        statusTextView.setText(approvalStatus);
 
         return convertView;
     }

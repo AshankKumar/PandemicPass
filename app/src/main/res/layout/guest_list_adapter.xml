@@ -12,7 +12,7 @@
         android:text="TextView3"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/textView3"
+        android:id="@+id/guestListName"
         android:textColor="@color/black"
         android:layout_weight="50"/>
 
@@ -23,7 +23,7 @@
         android:gravity="center"
         android:text="Date"
         android:textColor="@color/black"
-        android:id="@+id/textView4"
+        android:id="@+id/guestListStatus"
         android:layout_weight="50"/>
 
 </LinearLayout>
