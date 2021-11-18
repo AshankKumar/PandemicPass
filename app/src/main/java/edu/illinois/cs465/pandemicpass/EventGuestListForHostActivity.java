@@ -32,6 +32,7 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
     private String eventId;
     private String guestKey;
 
+    // TODO: Refresh list when back button is hit from HostApprovedAndDeny.java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("HMMM", "test");
