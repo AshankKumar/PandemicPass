@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -41,6 +44,18 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
         guestsListView.setAdapter(guestListAdapter);
 
         eventId = getIntent().getExtras().getString("event_id");
+
+        guestsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Guest g = (Guest) adapterView.getItemAtPosition(i);
+
+                Intent intent = new Intent(EventGuestListForHostActivity.this, HostApproveAndDeny.class);
+                intent.putExtra("guest_id", g.userId);
+
+                startActivity(intent);
+            }
+        });
 
         dbReferenceEvent.child(eventId).child("guestList").addChildEventListener(new ChildEventListener() {
             @Override
