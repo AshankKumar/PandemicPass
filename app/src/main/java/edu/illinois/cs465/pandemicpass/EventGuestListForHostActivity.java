@@ -27,6 +27,7 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
     private DatabaseReference dbReferenceEvent;
 
     private String eventId;
+    private String guestKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,9 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(EventGuestListForHostActivity.this, HostApproveAndDeny.class);
                 intent.putExtra("guest_id", g.userId);
+                intent.putExtra("member_id", g.memberId);
+                intent.putExtra("event_id", eventId);
+                intent.putExtra("guest_key", guestKey);
 
                 startActivity(intent);
             }
@@ -61,7 +65,8 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Guest guest = snapshot.getValue(Guest.class);
-                guest.userId = snapshot.getKey();
+//                guest.userId = snapshot.getKey();
+                guestKey = snapshot.getKey();
                 guestsArrayList.add(guest);
                 guestListAdapter.notifyDataSetChanged();
             }
