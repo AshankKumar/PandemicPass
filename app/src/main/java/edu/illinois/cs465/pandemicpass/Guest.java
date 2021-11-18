@@ -5,6 +5,7 @@ public class Guest {
     public String userId;
     public String memberId;
     public String approvalStatus;
+    public String guestKey; // might remove later
 
     public Guest() {}
 

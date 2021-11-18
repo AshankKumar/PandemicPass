@@ -55,7 +55,9 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
                 intent.putExtra("guest_id", g.userId);
                 intent.putExtra("member_id", g.memberId);
                 intent.putExtra("event_id", eventId);
-                intent.putExtra("guest_key", guestKey);
+                intent.putExtra("guest_key", g.guestKey);
+                intent.putExtra("approval_status", g.approvalStatus);
+                intent.putExtra("guest_name", g.name);
 
                 startActivity(intent);
             }
@@ -65,8 +67,8 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Guest guest = snapshot.getValue(Guest.class);
-//                guest.userId = snapshot.getKey();
-                guestKey = snapshot.getKey();
+                guest.guestKey = snapshot.getKey();
+//                guestKey = snapshot.getKey();
                 guestsArrayList.add(guest);
                 guestListAdapter.notifyDataSetChanged();
             }
