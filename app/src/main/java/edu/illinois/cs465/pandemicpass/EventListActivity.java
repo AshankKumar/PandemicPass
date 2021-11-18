@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -65,6 +67,32 @@ public class EventListActivity extends AppCompatActivity implements View.OnClick
 
         dbReferenceUserWithUserId = FirebaseDatabase.getInstance()
                 .getReference("User").child(userId);
+
+        attendingEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Event e = (Event) adapterView.getItemAtPosition(i);
+
+                Intent intent = new Intent(EventListActivity.this, EventDetailsForGuestActivity.class);
+                intent.putExtra("eventId", e.id);
+
+                startActivity(intent);
+            }
+        });
+
+        hostingEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Event e = (Event) adapterView.getItemAtPosition(i);
+
+                Intent intent = new Intent(EventListActivity.this, EventDetailsForHostActivity.class);
+                // lmao these are different
+                Log.d("DEBUG", e.id);
+                intent.putExtra("event_id", e.id);
+
+                startActivity(intent);
+            }
+        });
 
         dbReferenceEvent.orderByChild("hostId").equalTo(userId).addChildEventListener(new ChildEventListener() {
             @Override

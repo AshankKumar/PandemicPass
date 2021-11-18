@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class EventDetailsForHostActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView EventNameTextView;
@@ -49,6 +51,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
         } else if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("event_id")) {
             eventId = getIntent().getExtras().getString("event_id");
+            Log.d("DEBUG", "we here!");
             Log.d("DEBUG", eventId);
         }
 
@@ -99,12 +102,33 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
 
                 }
             });
+        } else if (eventId != null) {
+            DatabaseReference dbReferenceEventWithEventId = dbReferenceEvent.child(eventId);
+            dbReferenceEventWithEventId = FirebaseDatabase.getInstance().getReference("Event").child(eventId);
+
+            dbReferenceEventWithEventId.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        event = snapshot.getValue(Event.class);
+                        renderScreen();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
     }
 
-
     private void renderScreen() {
         Log.d("DEBUG", "Rendering");
+
+        if (eventCode == null) {
+            eventCode = event.eventCode;
+        }
 
         EventNameTextView.setText(event.eventName);
         EventDateTextView.setText(event.date);
