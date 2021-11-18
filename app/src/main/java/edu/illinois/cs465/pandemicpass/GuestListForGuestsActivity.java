@@ -65,7 +65,7 @@ public class GuestListForGuestsActivity extends AppCompatActivity {
         guestListView = (ListView) findViewById(R.id.guestList);
         guestArrayList = new ArrayList<Guest>();
 
-        GuestListGuestNameAdapter guestListAdapter = new GuestListGuestNameAdapter(this, R.layout.member_list_member_name_adapter, guestArrayList);
+        GuestListNameAdapter guestListAdapter = new GuestListNameAdapter(this, R.layout.member_list_member_name_adapter, guestArrayList);
 
         guestListView.setAdapter(guestListAdapter);
 
