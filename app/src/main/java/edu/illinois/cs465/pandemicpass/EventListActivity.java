@@ -74,6 +74,7 @@ public class EventListActivity extends AppCompatActivity implements View.OnClick
                 Event e = (Event) adapterView.getItemAtPosition(i);
 
                 Intent intent = new Intent(EventListActivity.this, EventDetailsForGuestActivity.class);
+                Log.d("DEBUG", e.id);
                 intent.putExtra("eventId", e.id);
 
                 startActivity(intent);
@@ -129,8 +130,9 @@ public class EventListActivity extends AppCompatActivity implements View.OnClick
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Event e = snapshot.getValue(Event.class);
                 String date = snapshot.child("eventDate").getValue(String.class);
+                String id_pls = snapshot.child("eventId").getValue(String.class);
                 e.date = date;
-                e.id = snapshot.getKey();
+                e.id = id_pls;
                 attendingEvents.add(e);
                 attendingEventListAdapter.notifyDataSetChanged();
             }
