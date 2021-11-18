@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,11 +27,14 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
 
     private DatabaseReference dbReferenceEvent;
 
+    private GuestListGuestNameAdapter guestListAdapter;
+
     private String eventId;
     private String guestKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("HMMM", "test");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_guest_list_for_host);
 
@@ -41,7 +45,7 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
         dbReferenceEvent = FirebaseDatabase.getInstance()
                 .getReference("Event");
 
-        GuestListGuestNameAdapter guestListAdapter = new GuestListGuestNameAdapter(this, R.layout.guest_list_adapter, guestsArrayList);
+        guestListAdapter = new GuestListGuestNameAdapter(this, R.layout.guest_list_adapter, guestsArrayList);
         guestsListView.setAdapter(guestListAdapter);
 
         eventId = getIntent().getExtras().getString("event_id");
@@ -49,6 +53,7 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
         guestsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Guest g = (Guest) adapterView.getItemAtPosition(i);
 
                 Intent intent = new Intent(EventGuestListForHostActivity.this, HostApproveAndDeny.class);
@@ -63,12 +68,21 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
             }
         });
 
+        guestsArrayList.clear();
+        guestListAdapter.clear();
+        guestListAdapter.notifyDataSetChanged();
+        getData();
+    }
+
+    public void getData() {
+        guestsArrayList.clear();
+        guestListAdapter.clear();
+        guestListAdapter.notifyDataSetChanged();
         dbReferenceEvent.child(eventId).child("guestList").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Guest guest = snapshot.getValue(Guest.class);
                 guest.guestKey = snapshot.getKey();
-//                guestKey = snapshot.getKey();
                 guestsArrayList.add(guest);
                 guestListAdapter.notifyDataSetChanged();
             }
@@ -94,4 +108,20 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
             }
         });
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        guestsArrayList.clear();
+//        guestListAdapter.clear();
+//        guestListAdapter.notifyDataSetChanged();
+//
+//        guestsListView.setAdapter(null);
+//        guestListAdapter = null;
+//
+//        guestListAdapter = new GuestListGuestNameAdapter(this, R.layout.guest_list_adapter, guestsArrayList);
+//        guestsListView.setAdapter(guestListAdapter);
+//
+//        getData();
+//    }
 }
