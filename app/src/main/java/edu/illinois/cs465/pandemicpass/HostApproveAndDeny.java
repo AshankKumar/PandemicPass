@@ -258,7 +258,42 @@ public class HostApproveAndDeny extends AppCompatActivity implements View.OnClic
                 }
             });
         } else if (id == R.id.hostViewGuestTest) {
+            dbReferenceUser.child(userId).child("members").child(memberId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Member member = snapshot.getValue(Member.class);
+                    if (!member.testResultFileName.isEmpty()) {
+                        storageReference.child(member.testResultFileName).getDownloadUrl()
+                                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        if (task.isSuccessful()) {
+                                            Uri vaccinationRecord = task.getResult();
+                                            Log.d("HMMM", vaccinationRecord.toString());
 
+                                            ImageView overlay = new ImageView(HostApproveAndDeny.this);
+                                            Glide.with(HostApproveAndDeny.this).load(vaccinationRecord).into(overlay);
+                                            mainFrame.addView(overlay);
+
+                                            overlay.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    mainFrame.removeView(overlay);
+                                                }
+                                            });
+                                        } else {
+                                            // TODO: something
+                                        }
+                                    }
+                                });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         } else if (id == R.id.acceptButton) {
 
         } else if (id == R.id.denyButton) {
