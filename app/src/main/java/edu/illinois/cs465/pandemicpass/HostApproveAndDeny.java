@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -129,19 +130,6 @@ public class HostApproveAndDeny extends AppCompatActivity implements View.OnClic
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     event = snapshot.getValue(Event.class);
-
-//                    dbReferenceEvent.child(eventId).child("guestList").equalTo(guestKey).addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            guest
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-
                     renderScreen();
                 }
             }
@@ -169,6 +157,7 @@ public class HostApproveAndDeny extends AppCompatActivity implements View.OnClic
                     // check and see if they have something uploaded
                     if (member.vaccinationRecordFileName == null || member.vaccinationRecordFileName.equals("")) {
                         guestTestingStatus.setText("No Submission");
+                        viewTestButton.setVisibility(View.GONE);
                     } else {
                         guestTestingStatus.setText("Submitted");
                     }
@@ -182,6 +171,7 @@ public class HostApproveAndDeny extends AppCompatActivity implements View.OnClic
                     // check and see if they have something uploaded
                     if (member.testResultFileName == null || member.testResultFileName.equals("")) {
                         guestVaccineStatus.setText("No Submission");
+                        viewVaccineButton.setVisibility(View.GONE);
                     } else {
                         guestVaccineStatus.setText("Submitted");
                     }
@@ -194,26 +184,8 @@ public class HostApproveAndDeny extends AppCompatActivity implements View.OnClic
             }
         });
 
-//        if (!event.acceptTestResult) {
-//            testingStatusTextTextView.setVisibility(View.GONE);
-//            guestTestingStatus.setVisibility(View.GONE);
-//            viewTestButton.setVisibility(View.GONE);
-//
-//        } else {
-//            // check and see if they have something uploaded
-//        }
-//
-//        if (!event.acceptVaccinationRecord) {
-//            vaccineStatusTextTextView.setVisibility(View.GONE);
-//            guestVaccineStatus.setVisibility(View.GONE);
-//            viewVaccineButton.setVisibility(View.GONE);
-//        } else {
-//            // check and see if they have something uploaded
-//        }
-
         guestNameTextView.setText(guestName);
         guestApprovalStatusTextView.setText(guestApprovalStatus);
-
     }
 
     @Override
@@ -295,9 +267,12 @@ public class HostApproveAndDeny extends AppCompatActivity implements View.OnClic
                 }
             });
         } else if (id == R.id.acceptButton) {
+            dbReferenceEvent.child(eventId).child("guestList").child(guestKey).child("approvalStatus").setValue("Approved");
+            guestApprovalStatusTextView.setText("Approved");
 
         } else if (id == R.id.denyButton) {
-
+            dbReferenceEvent.child(eventId).child("guestList").child(guestKey).child("approvalStatus").setValue("Denied");
+            guestApprovalStatusTextView.setText("Denied");
         }
     }
 }
