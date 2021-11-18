@@ -1,6 +1,7 @@
 package edu.illinois.cs465.pandemicpass;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class EventListNameAndDateAdapter extends ArrayAdapter<Event> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         String name = getItem(position).eventName;
         String date = getItem(position).date;
 

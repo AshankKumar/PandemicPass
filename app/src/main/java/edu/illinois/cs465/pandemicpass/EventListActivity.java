@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +22,8 @@ import java.util.ArrayList;
 
 public class EventListActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ListView eventsListView;
+    private ListView hostingEventsListView;
+    private ListView attendingEventsListView;
     private TextView attendingTextView;
     private TextView hostingTextView;
 
@@ -38,7 +40,10 @@ public class EventListActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
 
-        eventsListView = (ListView) findViewById(R.id.listViewHosting);
+        hostingEventsListView = (ListView) findViewById(R.id.listViewHosting);
+        hostingEventsListView.setVisibility(View.GONE);
+        attendingEventsListView = (ListView) findViewById(R.id.listViewAttending);
+
         attendingTextView = (TextView) findViewById(R.id.AttendingTextView);
         attendingTextView.setBackgroundColor(Color.CYAN);
         hostingTextView = (TextView) findViewById(R.id.HostingTextView);
@@ -48,7 +53,10 @@ public class EventListActivity extends AppCompatActivity implements View.OnClick
         attendingEvents = new ArrayList<>();
 
         EventListNameAndDateAdapter hostEventListAdapter = new EventListNameAndDateAdapter(this, R.layout.event_list_event_name_and_date_adapter, hostingEvents);
-        eventsListView.setAdapter(hostEventListAdapter);
+        hostingEventsListView.setAdapter(hostEventListAdapter);
+
+        EventListNameAndDateAdapter attendingEventListAdapter = new EventListNameAndDateAdapter(this, R.layout.event_list_event_name_and_date_adapter, attendingEvents);
+        attendingEventsListView.setAdapter(attendingEventListAdapter);
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -92,9 +100,11 @@ public class EventListActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Event e = snapshot.getValue(Event.class);
+                String date = snapshot.child("eventDate").getValue(String.class);
+                e.date = date;
                 e.id = snapshot.getKey();
                 attendingEvents.add(e);
-                hostEventListAdapter.notifyDataSetChanged();
+                attendingEventListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -126,9 +136,13 @@ public class EventListActivity extends AppCompatActivity implements View.OnClick
         if (id == R.id.AttendingTextView) {
             attendingTextView.setBackgroundColor(Color.CYAN);
             hostingTextView.setBackgroundColor(Color.WHITE);
+            hostingEventsListView.setVisibility(View.GONE);
+            attendingEventsListView.setVisibility(View.VISIBLE);
         } else if (id == R.id.HostingTextView) {
             hostingTextView.setBackgroundColor(Color.CYAN);
             attendingTextView.setBackgroundColor(Color.WHITE);
+            attendingEventsListView.setVisibility(View.GONE);
+            hostingEventsListView.setVisibility(View.VISIBLE);
         }
     }
 }

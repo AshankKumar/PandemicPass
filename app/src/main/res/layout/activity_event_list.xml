@@ -83,24 +83,17 @@
                 android:textColor="@color/black"/>
         </LinearLayout>
 
-<!--        <ViewFlipper-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/listViewHosting">
-
         </ListView>
 
-<!--            <ListView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:id="@+id/listViewAttending">-->
-
-<!--            </ListView>-->
-<!--        </ViewFlipper>-->
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listViewAttending">
+        </ListView>
 
     </LinearLayout>
 
