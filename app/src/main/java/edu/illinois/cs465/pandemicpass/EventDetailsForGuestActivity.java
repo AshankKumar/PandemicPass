@@ -1,3 +1,5 @@
+// Go here when event clicked and host id != current id
+
 package edu.illinois.cs465.pandemicpass;
 
 import androidx.annotation.NonNull;

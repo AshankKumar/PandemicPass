@@ -25,15 +25,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 
-public class HostEventFourActivity extends AppCompatActivity implements View.OnClickListener {
+public class HostEditEventDetails extends AppCompatActivity implements View.OnClickListener {
 
     private Button eventCodeButton;
+    private Button submitChangesButton;
     private DatePickerDialog datePickerDialog;
     private Button eventDateButton;
     private EditText eventNameText;
@@ -45,6 +45,8 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
     private String eventName;
     private String eventLocation;
     private String eventDescription;
+    private String eventCode;
+    private String eventId;
     private boolean vaxAllowed;
     private boolean testAllowed;
     private int eventMonth;
@@ -58,11 +60,10 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
     private DateFormat dateFormatOnlyDate;
     private DateFormat dateFormatOnlyTime;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_host_event_four);
+        setContentView(R.layout.activity_host_edit_event_details);
 
         dbReferenceEvent = FirebaseDatabase.getInstance()
                 .getReference("Event");
@@ -71,17 +72,20 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                 .getReference("User");
 
         initDatePicker();
-        eventDateButton = findViewById(R.id.eventDatePickerButtonSummary);
+        eventDateButton = findViewById(R.id.eventDatePickerButtonEdit);
         eventDateButton.setText(getTodaysDate());
 
-        eventCodeButton = (Button) findViewById(R.id.genEventCode);
+        eventCodeButton = (Button) findViewById(R.id.finalizeEventDetails);
         eventCodeButton.setOnClickListener(this);
 
-        eventNameText = (EditText) findViewById(R.id.finalEventName);
-        eventLocationEditText = (EditText) findViewById(R.id.finalEventLocationEditText);
-        eventDescriptionEditText = (EditText) findViewById(R.id.finalEventDescriptionEditText);
-        vaxSwitch = (Switch) findViewById(R.id.finalVaxSwitch);
-        testSwitch = (Switch) findViewById(R.id.finalTestSwitch);
+        submitChangesButton = (Button) findViewById(R.id.finalizeEventDetails);
+        submitChangesButton.setOnClickListener(this);
+
+        eventNameText = (EditText) findViewById(R.id.EditEventName);
+        eventLocationEditText = (EditText) findViewById(R.id.EditEventLocationEditText);
+        eventDescriptionEditText = (EditText) findViewById(R.id.EditEventDescriptionEditText);
+        vaxSwitch = (Switch) findViewById(R.id.EditVaxSwitch);
+        testSwitch = (Switch) findViewById(R.id.EditTestSwitch);
 
         dateFormat = DateFormat.getDateTimeInstance(
                 DateFormat.LONG, DateFormat.LONG,
@@ -111,6 +115,8 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
         eventLocationEditText.setText(eventLocation);
         eventDescription = getIntent().getExtras().getString("event_description");
         eventDescriptionEditText.setText(eventDescription);
+
+        eventCode = getIntent().getExtras().getString("event_code");
     }
 
     private void initDatePicker() {
@@ -183,11 +189,42 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
         datePickerDialog.show();
     }
 
+    private void updateEvent(String eventName, String eventLocation, String eventDescription, boolean vaxAllowed, boolean testAllowed, String eventDate, String eventTime) {
+        dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    eventId = objSnapshot.getKey();
+                    break;
+                }
+
+                dbReferenceEvent.child(eventId).child("eventName").setValue(eventName);
+                dbReferenceEvent.child(eventId).child("location").setValue(eventLocation);
+                dbReferenceEvent.child(eventId).child("description").setValue(eventDescription);
+                dbReferenceEvent.child(eventId).child("acceptVaccinationRecord").setValue(vaxAllowed);
+                dbReferenceEvent.child(eventId).child("acceptTestResult").setValue(testAllowed);
+                dbReferenceEvent.child(eventId).child("date").setValue(eventDate);
+                dbReferenceEvent.child(eventId).child("time").setValue(eventTime);
+
+
+                Intent intent = new Intent(HostEditEventDetails.this, EventDetailsForHostActivity.class);
+
+                intent.putExtra("event_code", eventCode);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
 
-        if (id == R.id.genEventCode) {
+        if (id == R.id.finalizeEventDetails) {
             String eventName = eventNameText.getText().toString().trim();
             String eventLocation = eventLocationEditText.getText().toString();
             String eventDescription = eventDescriptionEditText.getText().toString();
@@ -210,56 +247,16 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                 eventDescriptionEditText.requestFocus();
             } else {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String eventCode = UUID.randomUUID().toString().substring(0, 7);
 
-                dbReferenceUser.child(userId).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String userEmail = snapshot.getValue(String.class);
-
-                        dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (!snapshot.exists()) {
-                                    Event event = new Event(userId, userEmail, eventCode, eventName, eventDate, eventTime, eventLocation, eventDescription, new HashMap<String, Guest>(), vaxAllowed, testAllowed);
-                                    dbReferenceEvent.push().setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                            if (task.isSuccessful()) {
-                                                // will probably remove the toast for success and just redirect instead
-                                                Toast.makeText(HostEventFourActivity.this, "Success", Toast.LENGTH_LONG).show();
-                                            } else {
-                                                Toast.makeText(HostEventFourActivity.this, "Fail", Toast.LENGTH_LONG).show();
-                                            }
-
-                                        }
-                                    });
-                                }
-                                else {
-                                    Log.e("firebase", "duplicate key");
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-                Intent intent = new Intent(this, HostEventCodeActivity.class);
-
-                intent.putExtra("event_code", eventCode);
-
-                startActivity(intent);
+                updateEvent(eventName, eventLocation, eventDescription, vaxAllowed, testAllowed, eventDate, eventTime);
             }
+//
+//            Intent intent = new Intent(this, EventDetailsForHostActivity.class);
+//
+//            intent.putExtra("event_key", eventKey);
+//
+//            System.out.println("Here");
+//            startActivity(intent);
         }
     }
 }

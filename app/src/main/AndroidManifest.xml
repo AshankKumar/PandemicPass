@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PandemicPass">
         <activity
+            android:name=".HostApproveAndDeny"
+            android:exported="false" />
+        <activity
+            android:name=".HostEditEventDetails"
+            android:exported="false" />
+        <activity
+            android:name=".HostEventCodeActivity"
+            android:exported="false" />
+        <activity
             android:name=".GuestListForGuestsActivity"
             android:exported="true" />
         <activity
