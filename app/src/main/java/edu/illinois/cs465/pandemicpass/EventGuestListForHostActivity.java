@@ -72,7 +72,7 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
         guestsArrayList.clear();
         guestListAdapter.clear();
         guestListAdapter.notifyDataSetChanged();
-        getData();
+//        getData();
     }
 
     public void getData() {
@@ -110,19 +110,19 @@ public class EventGuestListForHostActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        guestsArrayList.clear();
-//        guestListAdapter.clear();
-//        guestListAdapter.notifyDataSetChanged();
-//
-//        guestsListView.setAdapter(null);
-//        guestListAdapter = null;
-//
-//        guestListAdapter = new GuestListGuestNameAdapter(this, R.layout.guest_list_adapter, guestsArrayList);
-//        guestsListView.setAdapter(guestListAdapter);
-//
-//        getData();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        guestsArrayList.clear();
+        guestListAdapter.clear();
+        guestListAdapter.notifyDataSetChanged();
+
+        guestsListView.setAdapter(null);
+        guestListAdapter = null;
+
+        guestListAdapter = new GuestListGuestNameAdapter(this, R.layout.guest_list_adapter, guestsArrayList);
+        guestsListView.setAdapter(guestListAdapter);
+
+        getData();
+    }
 }
