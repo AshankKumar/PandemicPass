@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -48,6 +49,8 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
     private DatabaseReference dbReferenceEventWithEventId;
     private DatabaseReference dbReferenceEventWithEventIdGuestList;
     private ArrayList<Guest> guestsInUserGroupAttending;
+    private String eventCode;
+    private DatabaseReference dbReferenceEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
         }
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+        dbReferenceEvent = FirebaseDatabase.getInstance().getReference("Event");
         eventNameTextView = (TextView) findViewById(R.id.eventName);
         hostTextView = (TextView) findViewById(R.id.host);
         dateTextView = (TextView) findViewById(R.id.date);
@@ -186,6 +189,7 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
         eventName = e.eventName;
         eventDate = e.date;
         eventTime = e.time;
+        eventCode = e.eventCode;
 
         eventNameTextView.setText(e.eventName);
         hostTextView.setText(e.hostName);
@@ -232,9 +236,13 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
 
         if (id == R.id.editPartyMembers) {
             //TODO
+            verifyEventCodeAndRedirect();
         }
         else if (id == R.id.updateStatuses) {
             //TODO
+            Intent updateStatusesIntent = new Intent(this, UploadStatusesActivity.class);
+            updateStatusesIntent.putExtra("eventId", eventId);
+            startActivity(updateStatusesIntent);
         }
         else if (id == R.id.guestList) {
             goToGuestList();
@@ -249,5 +257,41 @@ public class EventDetailsForGuestActivity extends AppCompatActivity implements V
         guestListForGuestIntent.putExtra("eventTime", eventTime);
         startActivity(guestListForGuestIntent);
 
+    }
+
+    public void verifyEventCodeAndRedirect() {
+        if (eventCode.isEmpty()) {
+            return;
+        }
+
+        dbReferenceEvent.orderByChild("eventCode").equalTo(eventCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    Toast.makeText(EventDetailsForGuestActivity.this, "Invalid event code", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent selectMembersIntent = new Intent(EventDetailsForGuestActivity.this, JoinSelectMembersActivity.class);
+                    for(DataSnapshot snap: snapshot.getChildren()) {
+                        String eventId = snap.getKey();
+                        Event e = (Event) snap.getValue(Event.class);
+                        String eventName = e.eventName;
+                        String eventDate = e.date;
+                        selectMembersIntent.putExtra("eventId", eventId);
+                        selectMembersIntent.putExtra("eventName", eventName);
+                        selectMembersIntent.putExtra("eventDate", eventDate);
+                        break;
+                    }
+                    selectMembersIntent.putExtra("eventCode", eventCode);
+                    startActivity(selectMembersIntent);
+                    EventDetailsForGuestActivity.this.finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

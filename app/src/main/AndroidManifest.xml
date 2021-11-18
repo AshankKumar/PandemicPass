@@ -13,6 +13,12 @@
             android:name=".GuestListForGuestsActivity"
             android:exported="true" />
         <activity
+            android:name=".UploadStatusesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UploadStatusAfterPickingMemberActivity"
+            android:exported="true" />
+        <activity
             android:name=".JoinSelectMembersActivity"
             android:exported="true" />
         <activity
