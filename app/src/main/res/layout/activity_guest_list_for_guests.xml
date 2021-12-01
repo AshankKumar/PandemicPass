@@ -21,6 +21,8 @@
             android:layout_height="wrap_content"
             android:text="Event Name"
             android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginBottom="20dp"></TextView>
 
         <LinearLayout
@@ -35,7 +37,8 @@
                 android:layout_weight="60"
                 android:layout_height="wrap_content"
                 android:text="date"
-                android:textSize="20sp"
+                android:textSize="24sp"
+                android:textColor="@color/black"
                 android:layout_marginBottom="10dp"></TextView>
 
             <TextView
@@ -45,7 +48,8 @@
                 android:layout_weight="40"
                 android:layout_height="wrap_content"
                 android:text="time"
-                android:textSize="20sp"
+                android:textSize="24sp"
+                android:textColor="@color/black"
                 android:layout_marginBottom="10dp"></TextView>
         </LinearLayout>
 

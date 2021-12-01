@@ -20,14 +20,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event Name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="30dp"
             android:layout_marginBottom="20dp"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Who's Joining The Event?"
-            android:textSize="20dp"
+            android:text="Who's joining the event?"
+            android:textColor="@color/black"
+            android:textSize="24dp"
             android:layout_marginBottom="10dp"
             ></TextView>
 

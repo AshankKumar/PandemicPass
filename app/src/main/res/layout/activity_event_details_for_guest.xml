@@ -96,7 +96,7 @@
                 android:textColor="@color/black"
                 android:id="@+id/time"
                 android:layout_width="0dp"
-                android:layout_weight="84"
+                android:layout_weight="86"
                 android:layout_height="wrap_content"
                 android:text="string"
                 android:textSize="18sp"></TextView>
@@ -112,19 +112,19 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_width="0dp"
-                android:layout_weight="20"
+                android:layout_weight="22"
                 android:layout_height="wrap_content"
                 android:text="Location: "
-                android:textSize="16sp"></TextView>
+                android:textSize="18sp"></TextView>
 
             <TextView
                 android:textColor="@color/black"
                 android:id="@+id/location"
                 android:layout_width="0dp"
-                android:layout_weight="80"
+                android:layout_weight="78"
                 android:layout_height="wrap_content"
                 android:text="string"
-                android:textSize="16sp"></TextView>
+                android:textSize="18sp"></TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -158,7 +158,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description: "
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:background="@color/browser_actions_bg_grey"></TextView>
 
             <TextView
@@ -190,7 +190,7 @@
                 android:textSize="18sp"
                 android:text="GUEST LIST"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"></Button>
+                android:layout_marginBottom="10dp"></Button>
 
             <TextView
                 android:textStyle="bold"
@@ -209,24 +209,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="100">
 
                 <Button
                     android:id="@+id/editPartyMembers"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Edit Members"
+                    android:text="Edit Group"
                     android:textSize="18sp"
-                    android:textColor="@color/white">
+                    android:textColor="@color/white"
+                    android:layout_gravity="left"
+                    android:layout_weight="50"
+                    android:layout_marginRight="10dp">
                 </Button>
 
                 <Button
+                    android:layout_marginLeft="10dp"
                     android:id="@+id/updateStatuses"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="50"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Update Statuses"
+                    android:text="Edit Uploads"
+                    android:layout_gravity="right"
                     android:textColor="@color/white">
                 </Button>
 

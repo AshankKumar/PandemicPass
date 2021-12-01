@@ -12,12 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="50"
         android:id="@+id/name"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:maxLines="1"
         android:textColor="@color/black"
         android:background="@color/white"
         android:focusable="false"
-        android:gravity="left"
+        android:gravity="center"
         />
 
     <TextView
@@ -26,11 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="50"
         android:id="@+id/approvalStatus"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:maxLines="1"
         android:textColor="@color/black"
         android:background="@color/white"
         android:focusable="false"
+        android:gravity="center"
         />
 
 

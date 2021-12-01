@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="Forgot Password?"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:gravity="left"
                 android:layout_weight="1"
                 ></TextView>
@@ -80,7 +80,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Register"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:gravity="right"
                 android:layout_weight="1"

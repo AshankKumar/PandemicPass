@@ -17,8 +17,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/app_blue"
-            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:text="Guests"
             android:textSize="30dp" />
     </LinearLayout>
@@ -26,10 +26,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click on guests to change their approval status!"
+        android:text="Click on guests to approve or deny them!"
         android:layout_gravity="center"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:layout_marginBottom="20dp"/>
 
     <LinearLayout
