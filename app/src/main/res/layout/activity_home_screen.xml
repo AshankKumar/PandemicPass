@@ -33,9 +33,11 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:text="Join Event"
+            android:backgroundTint="@color/orange"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            />
 
         <Button
             android:id="@+id/hostEvent"
@@ -43,7 +45,8 @@
             android:layout_height="110dp"
             android:text="Host Event"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:backgroundTint="@color/purple"/>
     </LinearLayout>
 
     <LinearLayout
@@ -59,6 +62,7 @@
             android:layout_height="110dp"
             android:text="View Events"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:backgroundTint="@color/green"/>
     </LinearLayout>
 </LinearLayout>
