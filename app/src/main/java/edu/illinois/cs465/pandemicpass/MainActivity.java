@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         }
         else if (id == R.id.forgotPassword) {
-            // TODO
+            startActivity(new Intent(MainActivity.this, ForgotPasswordActivity.class));
 
         }
     }
