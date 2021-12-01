@@ -11,6 +11,7 @@
         android:gravity="center"
         android:textAlignment="center"
         android:text="Name"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/name"

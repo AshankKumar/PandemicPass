@@ -18,17 +18,16 @@
             android:layout_height="wrap_content"
             android:text="@string/guestName"
             android:textAlignment="center"
-            android:textSize="60sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="70dp" />
+            android:layout_marginTop="20dp"/>
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -36,7 +35,8 @@
                 android:layout_weight="0.5"
                 android:text="Approval Status: "
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textStyle="bold"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/hostViewGuestapproval_status"
@@ -44,13 +44,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="24sp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:id="@+id/HostViewVaccineStatusText"
@@ -58,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Vaccine Status: "
-                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textSize="24sp"
                 android:textColor="@color/black"/>
 
             <TextView
@@ -67,13 +69,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="24sp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:id="@+id/hostViewTestingStatusText"
@@ -81,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Testing Status: "
-                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textSize="24sp"
                 android:textColor="@color/black"/>
 
             <TextView
@@ -90,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="24sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -98,7 +102,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="150dp">
+            android:layout_marginTop="100dp">
 
             <Button
                 android:id="@+id/hostViewGuestVaccine"

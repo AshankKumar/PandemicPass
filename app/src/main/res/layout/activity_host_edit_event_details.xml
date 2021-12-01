@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:hint="EVENT NAME PLACEHOLDER"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:layout_marginTop="30dp"/>
 
     <LinearLayout
@@ -23,11 +24,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Event Date and Time"
+            android:text="Date"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="18sp"/>
 
         <Button
+            android:textSize="18sp"
             android:id="@+id/eventDatePickerButtonEdit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"

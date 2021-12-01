@@ -6,6 +6,7 @@
     android:gravity="top|center">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -14,19 +15,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Event Date:"
+            android:text="What's the event date?"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="24sp"/>
 
         <Button
+            android:textSize="18sp"
             android:id="@+id/eventDatePickerButton"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:text="Jan 01 2020"
+            android:layout_marginTop="10dp"
             style="?spinnerStyle"
-            android:layout_marginLeft="25dp"
             android:onClick="openEventDatePicker"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What's the event location?"
+        android:textColor="@color/black"
+        android:textSize="24sp"/>
 
     <EditText
         android:id="@+id/eventLocationEditText"
@@ -34,8 +44,9 @@
         android:layout_height="wrap_content"
         android:minWidth="200dp"
         android:gravity="center"
-        android:layout_marginTop="90dp"
-        android:hint="Enter Event Location"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Event Location"/>
 
     <Button
         android:id="@+id/hostEventTwoNextButton"
@@ -43,7 +54,6 @@
         android:layout_height="wrap_content"
         android:text="Next"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_marginTop="200dp"/>
+        android:textSize="18sp"/>
 
 </LinearLayout>
