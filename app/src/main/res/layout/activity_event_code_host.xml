@@ -6,6 +6,16 @@
     android:gravity="top|center">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Event Code:"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="200dp"/>
+
+    <TextView
         android:id="@+id/eventCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +23,7 @@
         android:text="EVENT CODE PLACEHOLDER"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="20dp"/>
 
 
     <LinearLayout
