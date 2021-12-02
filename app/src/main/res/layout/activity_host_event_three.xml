@@ -25,7 +25,8 @@
         android:maxLines="10"
         android:minLines="6"
         android:scrollbars="vertical"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:gravity="center"/>
 
     <Button
         android:id="@+id/hostEventThreeNextButton"

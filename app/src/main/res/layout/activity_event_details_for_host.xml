@@ -33,12 +33,12 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
                     android:text="Event Date:"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginRight="8dp"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/HostViewEventDate"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text="PLACEHOLDER"
                     android:textColor="@color/black"
-                    android:textSize="18sp"/>
+                    android:textSize="24sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -63,7 +63,7 @@
                     android:text="Event Code:"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="24sp"
                     android:layout_marginRight="8dp"/>
 
                 <TextView
@@ -72,10 +72,19 @@
                     android:layout_height="wrap_content"
                     android:text="PLACEHOLDER"
                     android:textColor="@color/black"
-                    android:textSize="18sp"/>
+                    android:textSize="24sp"/>
             </LinearLayout>
 
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verification Modes:"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/HostViewEventVax"
@@ -94,7 +103,15 @@
             android:textSize="18sp"
             android:textColor="@color/black"/>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Event Location:"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/HostViewEventLocation"
@@ -102,18 +119,30 @@
             android:layout_height="wrap_content"
             android:text="EVENT LOCATION PLACEHOLDER"
             android:gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:textSize="18sp"
             android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Description:"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/HostViewEventDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non dapibus enim, ac condimentum lacus. Suspendisse at dapibus elit. Donec dictum sapien non tortor scelerisque tincidunt. Morbi aliquet et lacus in ornare. Vivamus sollicitudin eget urna eget fringilla. Sed sollicitudin fringilla lobortis. Donec nec nisl vel odio euismod ullamcorper. Etiam ornare purus ac quam auctor, in luctus velit feugiat. In vulputate dolor eget augue convallis consequat. Donec sed arcu neque."
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="18sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
