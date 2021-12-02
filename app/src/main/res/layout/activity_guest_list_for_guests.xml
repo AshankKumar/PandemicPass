@@ -23,12 +23,22 @@
         </ImageView>
 
         <TextView
+            android:id="@+id/guestListText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guest List"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop = "90dp"></TextView>
+
+        <TextView
             android:id="@+id/eventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event Name"
-            android:textSize="30sp"
-            android:textStyle="bold"
+            android:textSize="26sp"
             android:textColor="@color/black"
             android:layout_marginBottom="20dp"></TextView>
 
