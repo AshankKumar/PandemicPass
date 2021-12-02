@@ -22,11 +22,18 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MemberActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -177,6 +184,48 @@ public class MemberActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    Query eventAttendance = dbReferenceUserWithUserId.child("eventAttendance").orderByKey();
+
+                    eventAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            for (DataSnapshot eventAttendanceChild: dataSnapshot.getChildren()) {
+                                String eventAttendanceEventKey = eventAttendanceChild.getKey();
+                                Log.e("firebase", "event attendance key " + eventAttendanceEventKey);
+
+                                EventAttendanceEntry eventAttendanceEntry = eventAttendanceChild.getValue(EventAttendanceEntry.class);
+                                String eventId = eventAttendanceEntry.eventId;
+
+
+                                FirebaseDatabase.getInstance().getReference("Event").child(eventId).child("guestList").orderByChild("memberId").equalTo(member.id).addListenerForSingleValueEvent(
+                                            new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                        if (dataSnapshot.exists()) {
+
+                                                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                                                String guestListEntryKey = d.getKey();
+                                                                FirebaseDatabase.getInstance().getReference("Event").child(eventId).child("guestList").child(guestListEntryKey).child("name").setValue(newMemberName);
+                                                            }
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(DatabaseError databaseError) {
+
+                                                    }
+                                                }
+                                        );
+                                    }
+                                }
+
+                               @Override
+                               public void onCancelled(DatabaseError databaseError) {
+
+                               }
+
+                    });
                     Toast.makeText(MemberActivity.this, "Updated name.", Toast.LENGTH_SHORT).show();
                 }
                 else {

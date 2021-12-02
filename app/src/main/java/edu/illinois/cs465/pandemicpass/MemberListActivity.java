@@ -54,7 +54,7 @@ public class MemberListActivity extends AppCompatActivity implements View.OnClic
 
         memberListView = (ListView) findViewById(R.id.memberList);
 
-        MemberListAdapter memberListAdapter = new MemberListAdapter(this, R.layout.member_list_adapter, memberArrayList, dbReferenceUserWithUserIdMembers);
+        MemberListAdapter memberListAdapter = new MemberListAdapter(this, R.layout.member_list_adapter, memberArrayList, dbReferenceUserWithUserIdMembers, dbReferenceUserWithUserId, userId);
 
         memberListView.setAdapter(memberListAdapter);
 
