@@ -25,87 +25,81 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
-         />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/checkmark"
-        >
-    </ImageView>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
+        />
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_margin="10dp">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="20sp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Accept Test Result: "-->
-<!--            android:gravity="center"-->
-<!--            android:textStyle="bold"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="20sp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Accept Vaccination Record: "-->
-<!--            android:gravity="center"-->
-<!--            android:textStyle="bold"-->
-<!--            />-->
-<!--    </LinearLayout>-->
+<!--        android:layout_gravity="center"-->
+<!--        android:src="@drawable/checkmark"-->
+<!--        >-->
+<!--    </ImageView>-->
+
+
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
         <TextView
             android:textColor="@color/black"
             android:id="@+id/accept_test_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
             android:text="Accept Test Result:"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:layout_marginRight="10dp"/>
 
-        <TextView
-            android:textColor="@color/purple_700"
+        <ImageView
             android:id="@+id/accept_test_result_res"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:textSize="18sp"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icons8_check_circle"/>
+
+        <!--        <TextView-->
+<!--            android:textColor="@color/purple_700"-->
+<!--            android:id="@+id/accept_test_result_res"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="left"-->
+<!--            android:textSize="18sp"/>-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
         <TextView
             android:textColor="@color/black"
             android:id="@+id/accept_vaccine_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
             android:text="Accept Vaccination Record:"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:textColor="@color/purple_700"
-            android:id="@+id/accept_vaccine_record_res"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            android:gravity="left"
             android:textSize="18sp"
-            />
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/accept_vaccine_record_res"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icons8_cancel"/>
+
+<!--        <TextView-->
+<!--            android:textColor="@color/purple_700"-->
+<!--            android:id="@+id/accept_vaccine_record_res"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="left"-->
+<!--            android:textSize="18sp"-->
+<!--            />-->
     </LinearLayout>
 
     <TextView

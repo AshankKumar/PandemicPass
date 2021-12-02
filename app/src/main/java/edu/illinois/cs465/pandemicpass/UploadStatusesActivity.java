@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,9 +39,11 @@ public class UploadStatusesActivity extends AppCompatActivity {
     private DatabaseReference dbReferenceCurrentUserMember;
     private ListView attendingMemberListView;
 
-    private TextView acceptTestResult;
-    private TextView acceptVaccinationRecord;
+//    private TextView acceptTestResult;
+//    private TextView acceptVaccinationRecord;
 
+    private ImageView acceptTestResult;
+    private ImageView acceptVaccinationRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,8 @@ public class UploadStatusesActivity extends AppCompatActivity {
         }
 
 
-        acceptTestResult = (TextView) findViewById(R.id.accept_test_result_res);
-        acceptVaccinationRecord = (TextView) findViewById(R.id.accept_vaccine_record_res);
+        acceptTestResult = (ImageView) findViewById(R.id.accept_test_result_res);
+        acceptVaccinationRecord = (ImageView) findViewById(R.id.accept_vaccine_record_res);
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         attendingMemberListView = (ListView) findViewById(R.id.nameStatusListView);
         guestsInUserGroupAttending = new ArrayList<>();
@@ -103,8 +106,22 @@ public class UploadStatusesActivity extends AppCompatActivity {
         dbReferenceEventWithEventId.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                acceptTestResult.setText(snapshot.child("acceptTestResult").getValue().toString());
-                acceptVaccinationRecord.setText(snapshot.child("acceptVaccinationRecord").getValue().toString());
+                boolean testAllowed = (boolean) snapshot.child("acceptTestResult").getValue();
+                boolean vaxAllowed = (boolean) snapshot.child("acceptVaccinationRecord").getValue();
+
+                if (testAllowed) {
+                    acceptTestResult.setImageResource(R.drawable.icons8_check_circle);
+                } else {
+                    acceptTestResult.setImageResource(R.drawable.icons8_cancel);
+                }
+
+                if (vaxAllowed) {
+                    acceptVaccinationRecord.setImageResource(R.drawable.icons8_check_circle);
+                } else {
+                    acceptVaccinationRecord.setImageResource(R.drawable.icons8_cancel);
+                }
+//                acceptTestResult.setText(snapshot.child("acceptTestResult").getValue().toString());
+//                acceptVaccinationRecord.setText(snapshot.child("acceptVaccinationRecord").getValue().toString());
             }
 
             @Override
