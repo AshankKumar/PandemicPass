@@ -22,7 +22,14 @@
             android:text="Guests"
             android:textSize="30dp" />
     </LinearLayout>
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="10dp"
+        android:src="@drawable/testpass"
+        >
+    </ImageView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
