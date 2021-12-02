@@ -22,11 +22,18 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/passfail"
+            >
+        </ImageView>
         <LinearLayout
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp">
 
             <TextView

@@ -20,7 +20,13 @@
             android:text="Events"
             android:textSize="30sp" />
     </LinearLayout>
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/balloons"
+        >
+    </ImageView>
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
