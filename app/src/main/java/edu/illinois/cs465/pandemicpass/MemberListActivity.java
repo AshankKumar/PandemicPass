@@ -2,15 +2,27 @@ package edu.illinois.cs465.pandemicpass;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,10 +46,52 @@ public class MemberListActivity extends AppCompatActivity implements View.OnClic
     private ListView memberListView;
     private ArrayList<Member> memberArrayList;
 
+    AlertDialog.Builder builder;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_list);
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+        if (getIntent().getExtras() != null) {
+
+            TextView title = new TextView(this);
+            title.setText("New User Requirements");
+            title.setPadding(10, 10, 10, 10);
+            title.setGravity(Gravity.CENTER);
+            title.setTextColor(Color.BLACK);
+            title.setTextSize(23);
+
+            TextView msg = new TextView(this);
+            msg.setText("Add at least one member to your profile so you can join and host events! Clicking on members allow you to upload vaccine and test images!");
+            msg.setPadding(10, 10, 10, 10);
+            msg.setTextColor(Color.BLACK);
+            msg.setGravity(Gravity.CENTER);
+            msg.setTextSize(18);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCustomTitle(title);
+            builder.setView(msg);
+            builder.setCancelable(false);
+
+            DialogInterface.OnClickListener onClick = new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    if (which == DialogInterface.BUTTON_POSITIVE) {
+                        dialog.dismiss();
+                    }
+                }
+
+            };
+
+            builder.setPositiveButton("Okay", onClick);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

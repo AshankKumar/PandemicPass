@@ -102,7 +102,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                 if (task.isSuccessful()) {
                                                     //progressBar.setVisibility(View.INVISIBLE);
                                                     // start new activity to home screen and destroy this one instead of keeping in stack
-                                                    startActivity(new Intent(RegisterActivity.this, HomeScreenActivity.class));
+//                                                    startActivity(new Intent(RegisterActivity.this, HomeScreenActivity.class));
+                                                    Intent intent = new Intent(RegisterActivity.this, MemberListActivity.class);
+                                                    intent.putExtra("new_member", "new_member");
+                                                    startActivity(intent);
                                                     RegisterActivity.this.finish();
                                                 }
                                                 else {
