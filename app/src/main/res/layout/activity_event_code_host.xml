@@ -47,6 +47,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_marginRight="30dp"
+            android:drawableLeft="@drawable/share_button"
             />
 
         <Button
@@ -67,7 +68,7 @@
 
         <Button
             android:id="@+id/hostEventHomeButton"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Return\nHome"
             android:textColor="@color/white"
