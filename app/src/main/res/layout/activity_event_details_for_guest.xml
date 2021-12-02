@@ -10,11 +10,16 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         android:gravity="center">
-
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/party"
+            >
+        </ImageView>
         <TextView
             android:textColor="@color/black"
             android:id="@+id/eventName"
@@ -203,7 +208,7 @@
             <ListView
                 android:id="@+id/attendingMemberList"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="75dp">
             </ListView>
 
             <LinearLayout
