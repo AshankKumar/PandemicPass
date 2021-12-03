@@ -28,6 +28,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
     private TextView EventDescriptionTextView;
     private TextView VaxTextView;
     private TextView TestTextView;
+    private TextView timeTextView;
     private Button ReturnHomeButton;
     private Button ViewGuestsButton;
     private Button EditDetailsButton;
@@ -37,6 +38,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
     private String eventId;
     private String eventCode;
     private Event event;
+    private String eventTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
         EventDescriptionTextView = (TextView) findViewById(R.id.HostViewEventDescription);
         VaxTextView = (TextView) findViewById(R.id.HostViewEventVax);
         TestTextView = (TextView) findViewById(R.id.HostViewEventTest);
+        timeTextView = (TextView) findViewById(R.id.HostViewEventTime);
 
         ReturnHomeButton = (Button) findViewById(R.id.HostViewHomeButton);
         ReturnHomeButton.setOnClickListener(this);
@@ -135,6 +138,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
         EventCodeTextView.setText(eventCode);
         EventLocationTextView.setText(event.location);
         EventDescriptionTextView.setText(event.description);
+        timeTextView.setText(event.time);
 
 
         if (event.acceptVaccinationRecord) {
@@ -183,6 +187,7 @@ public class EventDetailsForHostActivity extends AppCompatActivity implements Vi
             intent.putExtra("event_location", event.location);
             intent.putExtra("event_description", event.description);
             intent.putExtra("event_code", eventCode);
+            intent.putExtra("event_time", event.time);
 
             startActivity(intent);
         } else if (id == R.id.HostViewGuestsButton) {

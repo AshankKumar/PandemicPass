@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +36,7 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
 
     private Button eventCodeButton;
     private Button submitChangesButton;
+    private Button timeButton;
     private DatePickerDialog datePickerDialog;
     private Button eventDateButton;
     private EditText eventNameText;
@@ -52,7 +55,12 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
     private int eventMonth;
     private int eventDay;
     private int eventYear;
+    private int hour;
+    private int minute;
+    private String eventTime;
     private DateFormat dateFormat;
+    private int hour24;
+    private int minute24;
 
     private DatabaseReference dbReferenceEvent;
     private DatabaseReference dbReferenceUser;
@@ -81,6 +89,8 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
         submitChangesButton = (Button) findViewById(R.id.finalizeEventDetails);
         submitChangesButton.setOnClickListener(this);
 
+        timeButton = (Button) findViewById(R.id.timeButtonThree);
+
         eventNameText = (EditText) findViewById(R.id.EditEventName);
         eventLocationEditText = (EditText) findViewById(R.id.EditEventLocationEditText);
         eventDescriptionEditText = (EditText) findViewById(R.id.EditEventDescriptionEditText);
@@ -92,9 +102,80 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
                 Locale.getDefault());
 
         initExtras();
+        timeButton.setText(eventTime);
 
         dateFormatOnlyDate = DateFormat.getDateInstance();
         dateFormatOnlyTime = DateFormat.getTimeInstance(DateFormat.SHORT);
+    }
+
+    public String buildTime() {
+        String timeSet = "";
+        if (hour24 > 12) {
+            hour24 -= 12;
+            timeSet = "PM";
+        } else if (hour24 == 0) {
+            hour24 += 12;
+            timeSet = "AM";
+        } else if (hour24 == 12){
+            timeSet = "PM";
+        }else{
+            timeSet = "AM";
+        }
+
+        String min = "";
+        if (minute24 < 10)
+            min = "0" + minute24 ;
+        else
+            min = String.valueOf(minute24);
+
+        // Append in a StringBuilder
+        String aTime = new StringBuilder().append(hour24).append(':')
+                .append(min ).append(" ").append(timeSet).toString();
+
+        return aTime;
+    }
+
+    public void popTimePickerThree(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectHour, int selectMinute) {
+                hour = selectHour;
+                minute = selectMinute;
+
+                hour24 = selectHour;
+                minute24 = selectMinute;
+
+//                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d"));
+                String timeSet = "";
+                if (hour > 12) {
+                    hour -= 12;
+                    timeSet = "PM";
+                } else if (hour == 0) {
+                    hour += 12;
+                    timeSet = "AM";
+                } else if (hour == 12){
+                    timeSet = "PM";
+                }else{
+                    timeSet = "AM";
+                }
+
+                String min = "";
+                if (minute < 10)
+                    min = "0" + minute ;
+                else
+                    min = String.valueOf(minute);
+
+                // Append in a StringBuilder
+                String aTime = new StringBuilder().append(hour).append(':')
+                        .append(min ).append(" ").append(timeSet).toString();
+                timeButton.setText(aTime);
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 
     private void initExtras() {
@@ -117,6 +198,8 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
         eventDescriptionEditText.setText(eventDescription);
 
         eventCode = getIntent().getExtras().getString("event_code");
+
+        eventTime = getIntent().getExtras().getString("event_time");
     }
 
     private void initDatePicker() {
@@ -211,6 +294,7 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
 
                 intent.putExtra("event_code", eventCode);
                 startActivity(intent);
+                HostEditEventDetails.this.finish();
             }
 
             @Override
@@ -248,7 +332,7 @@ public class HostEditEventDetails extends AppCompatActivity implements View.OnCl
             } else {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                updateEvent(eventName, eventLocation, eventDescription, vaxAllowed, testAllowed, eventDate, eventTime);
+                updateEvent(eventName, eventLocation, eventDescription, vaxAllowed, testAllowed, eventDate, buildTime());
             }
 //
 //            Intent intent = new Intent(this, EventDetailsForHostActivity.class);

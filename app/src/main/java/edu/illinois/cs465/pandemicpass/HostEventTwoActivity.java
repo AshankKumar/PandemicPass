@@ -112,6 +112,10 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
         month = month + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
+        eventMonth = month;
+        eventDay = day;
+        eventYear = year;
+
         return makeDateString(month, day, year);
     }
 
@@ -185,6 +189,9 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
             if (eventLocation.isEmpty()) {
                 eventLocationEditText.setError("Event location is required.");
                 eventLocationEditText.requestFocus();
+            } else if (timeButton.getText().equals("Select Time")) {
+                timeButton.setError("Event Time is required.");
+                timeButton.requestFocus();
             } else {
                 Intent intent = new Intent(this, HostEventThreeActivity.class);
 
