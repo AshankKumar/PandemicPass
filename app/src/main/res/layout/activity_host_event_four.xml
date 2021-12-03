@@ -44,13 +44,33 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What's the event time?"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/secondTimeButton"
+            android:onClick="secondPopTimePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Time"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Verification Modes"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:textStyle="bold"/>
 
         <LinearLayout
@@ -104,7 +124,7 @@
             android:text="Location"
             android:textColor="@color/black"
             android:textSize="24sp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"/>
 
         <EditText

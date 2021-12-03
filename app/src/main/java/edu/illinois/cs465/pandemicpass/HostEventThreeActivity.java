@@ -19,6 +19,10 @@ public class HostEventThreeActivity extends AppCompatActivity implements View.On
     private int eventMonth;
     private int eventDay;
     private int eventYear;
+    private int hour;
+    private int minute;
+    private int hour24;
+    private int minute24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,10 @@ public class HostEventThreeActivity extends AppCompatActivity implements View.On
         eventMonth = getIntent().getExtras().getInt("event_month");
         eventDay = getIntent().getExtras().getInt("event_day");
         eventYear = getIntent().getExtras().getInt("event_year");
+        hour = getIntent().getExtras().getInt("event_hour");
+        minute = getIntent().getExtras().getInt("event_minute");
+        hour24 = getIntent().getExtras().getInt("hour24");
+        minute24 = getIntent().getExtras().getInt("minute24");
     }
 
     @Override
@@ -65,6 +73,10 @@ public class HostEventThreeActivity extends AppCompatActivity implements View.On
                 intent.putExtra("event_day", eventDay);
                 intent.putExtra("event_location", eventLocation);
                 intent.putExtra("event_description", eventDescription);
+                intent.putExtra("event_hour", hour);
+                intent.putExtra("event_minute", minute);
+                intent.putExtra("hour24", hour24);
+                intent.putExtra("minute24", minute24);
 
                 startActivity(intent);
             }

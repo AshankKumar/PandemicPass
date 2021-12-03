@@ -6,19 +6,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
+import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class HostEventTwoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DatePickerDialog datePickerDialog;
     private Button eventDateButton;
+    private Button timeButton;
     private EditText eventLocationEditText;
     private Button nextButton;
     private String eventName;
@@ -27,6 +32,10 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
     private int eventMonth;
     private int eventDay;
     private int eventYear;
+    private int hour;
+    private int minute;
+    private int hour24;
+    private int minute24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +49,54 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
         nextButton = (Button) findViewById(R.id.hostEventTwoNextButton);
         nextButton.setOnClickListener(this);
 
+        timeButton = (Button) findViewById(R.id.timeButton);
+
         eventLocationEditText = (EditText) findViewById(R.id.eventLocationEditText);
 
         initExtras();
+    }
+
+    public void popTimePicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectHour, int selectMinute) {
+                hour = selectHour;
+                minute = selectMinute;
+
+                hour24 = selectHour;
+                minute24 = selectMinute;
+
+//                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d"));
+                String timeSet = "";
+                if (hour > 12) {
+                    hour -= 12;
+                    timeSet = "PM";
+                } else if (hour == 0) {
+                    hour += 12;
+                    timeSet = "AM";
+                } else if (hour == 12){
+                    timeSet = "PM";
+                }else{
+                    timeSet = "AM";
+                }
+
+                String min = "";
+                if (minute < 10)
+                    min = "0" + minute ;
+                else
+                    min = String.valueOf(minute);
+
+                // Append in a StringBuilder
+                String aTime = new StringBuilder().append(hour).append(':')
+                        .append(min ).append(" ").append(timeSet).toString();
+                timeButton.setText(aTime);
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 
     private void initExtras() {
@@ -141,6 +195,10 @@ public class HostEventTwoActivity extends AppCompatActivity implements View.OnCl
                 intent.putExtra("event_month", eventMonth);
                 intent.putExtra("event_day", eventDay);
                 intent.putExtra("event_location", eventLocation);
+                intent.putExtra("event_hour", hour);
+                intent.putExtra("event_minute", minute);
+                intent.putExtra("hour24", hour24);
+                intent.putExtra("minute24", minute24);
 
                 startActivity(intent);
             }
