@@ -105,6 +105,36 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
     }
 
     public void setTime() {
+        int local_hour24 = hour24;
+        int local_min24 = minute24;
+
+        String timeSet = "";
+        if (local_hour24 > 12) {
+            local_hour24 -= 12;
+            timeSet = "PM";
+        } else if (local_hour24 == 0) {
+            local_hour24 += 12;
+            timeSet = "AM";
+        } else if (local_hour24 == 12){
+            timeSet = "PM";
+        }else{
+            timeSet = "AM";
+        }
+
+        String min = "";
+        if (local_min24 < 10)
+            min = "0" + local_min24 ;
+        else
+            min = String.valueOf(local_min24);
+
+        // Append in a StringBuilder
+        String aTime = new StringBuilder().append(local_hour24).append(':')
+                .append(min ).append(" ").append(timeSet).toString();
+
+        timeButton.setText(aTime);
+    }
+
+    public String buildTime() {
         String timeSet = "";
         if (hour24 > 12) {
             hour24 -= 12;
@@ -128,34 +158,6 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
         String aTime = new StringBuilder().append(hour24).append(':')
                 .append(min ).append(" ").append(timeSet).toString();
 
-        System.out.println(aTime);
-        timeButton.setText(aTime);
-    }
-
-    public String buildTime() {
-        String timeSet = "";
-        if (hour > 12) {
-            hour -= 12;
-            timeSet = "PM";
-        } else if (hour == 0) {
-            hour += 12;
-            timeSet = "AM";
-        } else if (hour == 12){
-            timeSet = "PM";
-        }else{
-            timeSet = "AM";
-        }
-
-        String min = "";
-        if (minute < 10)
-            min = "0" + minute ;
-        else
-            min = String.valueOf(minute);
-
-        // Append in a StringBuilder
-        String aTime = new StringBuilder().append(hour).append(':')
-                .append(min ).append(" ").append(timeSet).toString();
-
         return aTime;
     }
 
@@ -165,6 +167,9 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
             public void onTimeSet(TimePicker view, int selectHour, int selectMinute) {
                 hour = selectHour;
                 minute = selectMinute;
+
+                hour24 = selectHour;
+                minute24 = selectMinute;
 
 //                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d"));
                 String timeSet = "";
