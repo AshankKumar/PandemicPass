@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +43,7 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
     private EditText eventDescriptionEditText;
     private Switch vaxSwitch;
     private Switch testSwitch;
+    private Button timeButton;
 
     private String eventName;
     private String eventLocation;
@@ -51,6 +54,11 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
     private int eventDay;
     private int eventYear;
     private DateFormat dateFormat;
+    private int hour;
+    private int minute;
+    private int hour24;
+    private int minute24;
+
 
     private DatabaseReference dbReferenceEvent;
     private DatabaseReference dbReferenceUser;
@@ -87,10 +95,108 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
                 DateFormat.LONG, DateFormat.LONG,
                 Locale.getDefault());
 
+        timeButton = (Button) findViewById(R.id.secondTimeButton);
+
         initExtras();
+        setTime();
 
         dateFormatOnlyDate = DateFormat.getDateInstance();
         dateFormatOnlyTime = DateFormat.getTimeInstance(DateFormat.SHORT);
+    }
+
+    public void setTime() {
+        String timeSet = "";
+        if (hour24 > 12) {
+            hour24 -= 12;
+            timeSet = "PM";
+        } else if (hour24 == 0) {
+            hour24 += 12;
+            timeSet = "AM";
+        } else if (hour24 == 12){
+            timeSet = "PM";
+        }else{
+            timeSet = "AM";
+        }
+
+        String min = "";
+        if (minute24 < 10)
+            min = "0" + minute24 ;
+        else
+            min = String.valueOf(minute24);
+
+        // Append in a StringBuilder
+        String aTime = new StringBuilder().append(hour24).append(':')
+                .append(min ).append(" ").append(timeSet).toString();
+
+        System.out.println(aTime);
+        timeButton.setText(aTime);
+    }
+
+    public String buildTime() {
+        String timeSet = "";
+        if (hour > 12) {
+            hour -= 12;
+            timeSet = "PM";
+        } else if (hour == 0) {
+            hour += 12;
+            timeSet = "AM";
+        } else if (hour == 12){
+            timeSet = "PM";
+        }else{
+            timeSet = "AM";
+        }
+
+        String min = "";
+        if (minute < 10)
+            min = "0" + minute ;
+        else
+            min = String.valueOf(minute);
+
+        // Append in a StringBuilder
+        String aTime = new StringBuilder().append(hour).append(':')
+                .append(min ).append(" ").append(timeSet).toString();
+
+        return aTime;
+    }
+
+    public void secondPopTimePicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectHour, int selectMinute) {
+                hour = selectHour;
+                minute = selectMinute;
+
+//                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d"));
+                String timeSet = "";
+                if (hour > 12) {
+                    hour -= 12;
+                    timeSet = "PM";
+                } else if (hour == 0) {
+                    hour += 12;
+                    timeSet = "AM";
+                } else if (hour == 12){
+                    timeSet = "PM";
+                }else{
+                    timeSet = "AM";
+                }
+
+                String min = "";
+                if (minute < 10)
+                    min = "0" + minute ;
+                else
+                    min = String.valueOf(minute);
+
+                // Append in a StringBuilder
+                String aTime = new StringBuilder().append(hour).append(':')
+                        .append(min ).append(" ").append(timeSet).toString();
+                timeButton.setText(aTime);
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 
     private void initExtras() {
@@ -111,6 +217,11 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
         eventLocationEditText.setText(eventLocation);
         eventDescription = getIntent().getExtras().getString("event_description");
         eventDescriptionEditText.setText(eventDescription);
+
+        hour = getIntent().getExtras().getInt("event_hour");
+        minute = getIntent().getExtras().getInt("event_minute");
+        hour24 = getIntent().getExtras().getInt("hour24");
+        minute24 = getIntent().getExtras().getInt("minute24");
     }
 
     private void initDatePicker() {
@@ -197,7 +308,7 @@ public class HostEventFourActivity extends AppCompatActivity implements View.OnC
             // Need month - 1 cuz DatePickerDialog is weird
             calendar.set(eventYear, eventMonth - 1, eventDay);
             String eventDate = dateFormatOnlyDate.format(calendar.getTime());
-            String eventTime = dateFormatOnlyTime.format(calendar.getTime());
+            String eventTime = buildTime();
 
             if (eventName.isEmpty()) {
                 eventNameText.setError("Event name is required.");
